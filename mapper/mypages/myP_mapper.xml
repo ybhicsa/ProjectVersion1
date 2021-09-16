@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.p0823.mapper.MypageMapper">
+
+	<select id="selectInquiryList"
+		resultType="com.site.p0823.Vo.Construction_InquiryVo">
+		select * from Construction_Inquiry
+		where user_nickname =
+		#{nickname}
+		order by cd_id desc
+	</select>
+
+	<!-- 중복 없을경우 장바구니 넣기 -->
+	<insert id="insertCartGo">
+		INSERT INTO user_Cart
+		(user_id,
+		product_number,
+		product_num,
+		product_name,
+		product_price)
+		VALUES
+		(#{arg1},
+		#{param1.product_Number},
+		#{arg2},
+		#{param1.product_Name},
+		#{param1.product_Price})
+	</insert>
+	
+	<!-- 중복있을시 장바구니 숫자 추가 -->
+	<update id="updateCartGo">
+		update user_cart
+		set product_num = product_num + #{arg2}
+		where user_id = #{arg1}
+	</update>
+
+	<!-- 조인 이용 장바구니 출력 -->
+	<select id="selectMyCartList"
+		resultType="com.site.p0823.Vo.UserCartVo">
+		select * from product_store p, user_cart c
+		WHERE
+		p.product_number = C.product_number
+		and user_id = #{product_Number}
+	</select>
+
+
+</mapper>
