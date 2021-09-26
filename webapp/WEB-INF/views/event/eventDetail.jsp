@@ -19,6 +19,90 @@
 <!-- icon script 링크 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	//댓글삭제
+	function commentDelete(event_no) {
+		/* alert("댓글삭제");
+		alert("event_no : " + event_no); */
+		if (confirm("댓글을 삭제하시겠습니까?")) {
+			$.ajax({
+				url : "/commentDelete",
+				type : "post",
+				data : { //넘길 데이터
+					"event_no" : event_no
+				},
+				success : function(data) { //성공시 updateEventVo
+					alert("댓글이 삭제되었습니다.");
+					$("#commentCount").text(data); // 댓글개수 변경
+					$("#" + event_no).remove(); //댓글삭제
+				},
+				error : function() { //실패시
+					alert("error");
+				}
+			});
+		} else {
+			return false;
+		}
+	}
+
+	//댓글등록
+	function commentBtn() {
+	
+		if ($("#event_content").val().length <= 2) {
+			alert("3글자 이상 입력하셔야 댓글을 등록할수 있습니다.");
+			$("#event_content").val("");
+			$("#event_content").focus();
+			return false;
+		}
+
+		var s_nick = '${session_nickName}';
+		if (s_nick == '') {
+			if (confirm("댓글을 입력하시려면 로그인을 하셔야 합니다.\n 로그인페이지로 이동할까요?")) {
+				location.href = "login";
+			}
+			return false;
+		}
+
+		$.ajax({
+					url : "/commentWrite",
+					type : "post",
+					data : {
+						user_nickname : '${session_nickName}',
+						event_id : '${param.event_id}',
+						event_content : $("#event_content").val()
+					},
+					success : function(data) {
+						//alert(data.eventVo.event_date);
+						var html = "";
+						
+						html += ' <ul id='+ data.eventVo.user_nickname +'> ';
+						html += ' <li class="comment-feed__item__content__author__name" ';
+						html += ' class="name">'+ data.eventVo.user_nickname +'</li> ';
+						html += ' <li class="txt">'+ data.eventVo.event_content +'</li> ';
+						html += ' <span>'+ data.eventVo.event_date +'</span> ';
+						
+						if ('${session_nickName}' == data.eventVo.user_nickname) {
+							
+							html += ' <li class="btn"> ';
+							html += ' <a onclick="commentDelete('+data.eventVo.user_nickname+')" ';
+							html += ' class="comment-feed__item__footer__reply-btn" class="rebtn">삭제</a> ';
+							html += ' </li> ';
+						}
+						html += ' <li class="btn"><a class="comment-feed__item__footer__reply-btn" class="rerebtn">답글 달기</a></li> ';
+						html += ' </ul> ';
+						html += '  '; 
+						
+						$("#content").prepend(html);
+						$("#event_content").val(""); 
+
+					},
+					error : function() { //실패시
+						alert("error");
+					}
+				});
+	}
+</script>
 <style type="text/css">
 body {
 	width: 0 auto;
@@ -110,13 +194,6 @@ header {
 	z-index: 99999;
 	background-color: rgb(251, 251, 251);
 	border-bottom: 1px solid #dbdbdb;
-}
-.contentPtag {
-	text-align: center;
-	font-size: 1.5em;
-	color: #757575;
-	font-weight: 700px;
-	margin: 3%;
 }
 .imgHover {
 	overflow: hidden;
@@ -227,31 +304,8 @@ footer {
 	<!-- Header End -->
 <div class="main_wrap">
 	<div class="competition-page">
-		<div>
-			<p class="contentPtag">글쓴이<br><br><span style="color: #00C892;"><strong>${communityVo.user_Nickname }</strong></span></p>
-		</div>
-		<div>
-			<h2 class="contentPtag">제목<br><br><span style="color: #00C892;"><strong>${communityVo.com_Title }</strong></span></h2>
-		</div>
-		<div>
-			<img class="competition-page__image" alt=""	src="communityImg/${communityVo.com_Img1 }">
-		</div>
-		<div>
-			<p class="contentPtag">${communityVo.com_Content1 }</p>
-		</div>
-		<div>
-			<img class="competition-page__image" alt=""	src="communityImg/${communityVo.com_Img2 }">
-		</div>
-		<div>
-			<p class="contentPtag">${communityVo.com_Content2 }</p>
-		</div>
-		<div>
-			<img class="competition-page__image" alt=""	src="communityImg/${communityVo.com_Img3 }">
-		</div>
-		<div>
-			<p class="contentPtag">${communityVo.com_Content3 }</p>
-		</div>
-
+		<img class="competition-page__image" alt=""
+			src="img/event/bespoke/${eventVo.event_Serve }">
 		<!-- 댓글 시작 -->
 		<div class="competition-page__comment">
 			<section class="comment-feed">
@@ -265,13 +319,13 @@ footer {
 							<div class="comment-content-input">
 								<input
 									class="comment-content-input__text comment-feed__form__content__text"
-									placeholder="댓글을 남겨 보세요." id="community_content" name="community_content">
+									id="event_content" name="event_content">
 							</div>
 						</div>
 						<div class="comment-feed__form__actions">
 							<!-- <input type="hidden" name="e_id"  value=""> -->
 							<button class="comment-feed__form__submit" aria-label="등록"
-								type="button" onclick="cCommentBtn()">등록</button>
+								type="button" onclick="commentBtn()">등록</button>
 						</div>
 					</div>
 				</form>
@@ -281,26 +335,32 @@ footer {
 				<ul class="comment-feed__list">
 					<li class="comment-feed__list__item">
 						<article class="comment-feed__item">
-							<p class="comment-feed__item__content" id="contentList">
-								<c:forEach items="${map.list}" var="CCommentVo">
-									<ul id='${CCommentVo.comment_no}' style="margin: 1%;">
+							<p class="comment-feed__item__content" id="content">
+								<c:forEach items="${map.list}" var="eventVo">
+									<ul id='${eventVo.event_no}' style="margin: 1%;">
 										<li class="comment-feed__item__content__author__name"
-											class="name" style="font-size: 15px;color: #424242; font-weight: 700; margin: 1%;">${CCommentVo.user_nickname }
-											&nbsp;&nbsp;<span class="txt" style="font-size: 15px; color: #424242; font-weight: 500;">${CCommentVo.comment_content}</span>
+											class="name" style="font-size: 15px;color: #424242; font-weight: 700; margin: 1%;">${eventVo.user_nickname }
+											&nbsp;&nbsp;<span class="txt" style="font-size: 15px; color: #424242; font-weight: 500;">${eventVo.event_content}</span>
 											<br><br>
-											<span style="font-size: 12px; color: #757575; font-weight: 500;">${CCommentVo.comment_date}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											<span style="font-size: 12px; color: #757575; font-weight: 500;">${eventVo.event_date}&nbsp;&nbsp;&nbsp;&nbsp;</span>
 											<!-- 자신이 쓴글인지 확인 -->
-											<c:if test="${session_nickName == CCommentVo.user_nickname}">
-												<span class="btn"> 
-													<a onclick="commentModify('${CCommentVo.comment_no}','${CCommentVo.comment_content }',
-													'${CCommentVo.comment_date}','${CCommentVo.user_nickname}','${CCommentVo.com_num}')" class="rebtn">수정</a> 
-													<a onclick="commentDelete('${CCommentVo.comment_no}')" class="comment-feed__item__footer__reply-btn" class="rebtn">삭제&nbsp;</a>
+											<c:if test="${session_nickName == eventVo.user_nickname}">
+												<span class="btn">
+													<a onclick="commentDelete('${eventVo.event_no}')"
+													class="comment-feed__item__footer__reply-btn" class="rebtn">삭제&nbsp;</a>
 												</span>
 											</c:if>
 											<span class="btn"><a class="comment-feed__item__footer__reply-btn" class="rerebtn">답글</a></span><p/>
 										</li>
 										
-										
+										<%-- <!-- 자신이 쓴글인지 확인 -->
+										<c:if test="${session_nickName == eventVo.user_nickname}">
+											<li class="btn">
+												<a onclick="commentDelete('${eventVo.event_no}')"
+												class="comment-feed__item__footer__reply-btn" class="rebtn">삭제&nbsp;</a>
+												</li>
+										</c:if>
+										<li class="btn"><a class="comment-feed__item__footer__reply-btn" class="rerebtn">답글</a></li> --%>
 									</ul>
 							</c:forEach>
 						</article>
@@ -311,64 +371,9 @@ footer {
 			</section>
 		</div>
 	</div>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
-		//댓글등록
-		function cCommentBtn() {
-			
-			if ($("#community_content").val().length <= 2) {
-				alert("3글자 이상 입력하셔야 댓글을 등록할수 있습니다.");
-				$("#community_content").val("");
-				$("#community_content").focus();
-				return false;
-			}
-		
-			var s_nick = '${session_nickName}';
-			if (s_nick == '') {
-				if (confirm("댓글을 입력하시려면 로그인을 하셔야 합니다.\n 로그인페이지로 이동할까요?")) {
-					location.href = "login";
-				}
-				return false;
-			}
-			
-			$.ajax({
-				url : "/communitycommentWrite",
-				type : "post",
-				data : {
-					user_nickname : '${session_nickName}',
-					com_num : '${param.com_Num}',
-					comment_content : $("#community_content").val()
-					
-				},
-				success : function(data) {
-					
-				   var html = "";
-					
-				   html += ' <ul id="'+data.Vo.comment_no+'" style="margin: 1%;"> ';
-	               html += ' <li class="comment-feed__item__content__author__name" class="name" ';
-	               html += ' style="font-size: 15px; color: #424242; font-weight: 700; margin: 1%;">'+data.Vo.user_nickname+' &nbsp;&nbsp; ';
-	               html += ' <span class="txt" style="font-size: 15px; color: #424242; font-weight: 500;">'+data.Vo.comment_content+'</span> <br> ';
-	               html += ' <span style="font-size: 12px; color: #757575; font-weight: 500;">'+data.Vo.comment_date+'&nbsp;&nbsp;&nbsp;&nbsp;</span> ';
-	               html += '  ';
-	               html += '  ';
-	               html += ' <span class="btn"><a class="comment-feed__item__footer__reply-btn" class="rerebtn">답글</a></span> ';
-	               html += ' <p /></li></ul> ';
-					
-					
-					
-					$("#contentList").prepend(html);
-					$("#community_content").val("");
-					/* $("#comRe").load(window.location.href + "#comRe");  */
-				},
-				error : function() { //실패시
-					alert("error");
-				}
-			});
-		}//cCommentBtn
-		</script>
 			<!-- top -->
 		<a
-			style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer; z-index: 99999;"
+			style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer; z-index: 9999;"
 			href="#" title="top"> <i class="fas fa-arrow-circle-up"
 			style="width: 2em; height: 2em;"></i></a>
 		<!-- top -->

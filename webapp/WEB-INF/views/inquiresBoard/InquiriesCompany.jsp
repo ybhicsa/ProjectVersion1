@@ -123,6 +123,7 @@ h2 {
 footer {
    text-align: center;
    color: black;
+   margin-top: 8%;
    padding-top: 1%;
    font-size: 12px;
 }
@@ -259,24 +260,27 @@ footer {
    <!-- Header End -->
    <div class="main_wrap">
    <section>
-      <form action="interiorInquiries" method="post">
-         <h2>시공문의하기</h2>
-         <span class="inquiriesExample">시공관련 문의사항만 접수가능합니다.</span>
+      <form action="inquiresComAnswer" method="post">
+         <h2>시공문의 내역</h2>
+         <span class="inquiriesExample">고객님의 시공관련 문의사항 입니다.</span>
+         <hr>
          <p />
-         <input class="css_inquiries_input" type="text" id="inquiriesTitle"
-            name="cd_Title" placeholder="제목을 입력해주세요." required>
+         	<h3>${inquiryVo.cd_Title }</h3>
          <p />
-         <textarea class="css_inquiries_input" id="inquiriesContent"
-            name="cd_Content" rows="5%" cols="10%" placeholder="문의내용을 입력해주세요.dd"
-            required></textarea>
+         <hr><br>
+         	<h4>${inquiryVo.cd_Content }</h4>
+         <hr><br>
          <p />
-         <input class="css_inquiries_input" type="text" id="interiorCompany"
-            name="cd_Company" value="${cc_Cname }" placeholder="시공업체명을 입력해주세요.">
+       <span class="inquiriesExample">  문의 해주셔서 감사합니다. 답변은 확인되는대로 바로 연락드리겠습니다.</span>
          <p />
-         <input type="hidden" name="user_Nickname"
-            value="${session_nickName }"> <input class="css_input_btn"
-            type="submit" value="문의하기" onclick="">
+         
+         <c:if test="${s_ID == 1 }">
+         <input type="hidden" name="cd_id"  value="${inquiryVo.cd_Id }"> 
+         <input class="css_input_btn" type="submit" value="답변하기" onclick="">
          <p />
+         </c:if>
+         
+         
       </form>
    </section>
    <!-- top -->

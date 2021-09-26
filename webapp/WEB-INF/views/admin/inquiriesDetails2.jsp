@@ -176,9 +176,9 @@
 	    	<hr>
 	    </header>
 	    <section>
-	    		<a href="inquiriesDetails2"><h4>일반문의 현황 가기</h4></a>
+	    		<a href="inquiriesDetails"><h4>시공문의 현황 가기</h4></a>
 	    	<table>
-	    		 <h2>시공문의 현황</h2>
+	    		 <h2>일반문의 현황</h2>
 	    		<thead>
 	    			<tr>
 	    				<th class="table_th">답변현황</th>
@@ -192,10 +192,10 @@
 		    		<c:forEach items="${map.list }" var="IVo" >
 		    			<tr>
 		    				<td class="table_td">${IVo.reply_Check}<!-- 번호 --></td>
-		    				<td class="table_td"><c:if test="${IVo.cd_Bstep == 1}">▶</c:if><a href="InquiriesCompany?cd_id=${IVo.cd_Id}"><mark>${IVo.cd_Title}</mark></a><!-- 제목 --></td>
+		    				<td class="table_td"><c:if test="${IVo.ud_Bstep == 1}">▶</c:if><a href="InquiriesUser?ud_id=${IVo.ud_Id}"><mark>${IVo.ud_Title}</mark></a><!-- 제목 --></td>
 		    			
 		    				<td class="table_td">${IVo.user_Nickname}<!-- 작성자 --></td>
-		    				<td class="table_td">${IVo.cd_Bdate}<!-- 작성일 --></td>
+		    				<td class="table_td">${IVo.ud_Bdate}<!-- 작성일 --></td>
 		    			</tr>
 		    		
 		    		</c:forEach>

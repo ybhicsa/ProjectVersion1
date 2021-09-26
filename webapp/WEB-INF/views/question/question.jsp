@@ -3,10 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<html>
 <head>
 <meta charset="UTF-8">
-<title>공간, 문의내역</title>
+<title>공간, 시공문의 | 인테리어상담</title>
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
    rel="stylesheet">
@@ -16,7 +15,6 @@
 <link
    href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap"
    rel="stylesheet">
-
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -27,6 +25,7 @@
 <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <style type="text/css">
@@ -34,86 +33,65 @@ body {
    background-color: #FAFAFA;
 }
 
+#myPageDiv {
+   border-top: 1px solid #ebebeb;
+   text-align: center;
+}
+header {
+   position: fixed;
+   width: 100%;
+   margin-top: -17%;
+   z-index: 99999;
+   background-color: rgb(251, 251, 251);
+   border-bottom: 1px solid #dbdbdb;
+}
+
 section {
    text-align: center;
-   margin-top: 1%;
+}
+.main_wrap {
+   margin-top: 17%;
 }
 
-#categoryName {
-   margin-top: 3%;
-}
-
-.aTag {
-   text-decoration: none;
-   color: black;
-}
-
-table {
-   text-align: center;
-   margin: auto;
-   width: 80%;
-   border-spacing: 10px;
-   border-collapse: collapse;
-}
-
-.table_th {
-   text-align: center;
-   width: 300px;
-   padding-top: 1%;
-   padding-bottom: 1%;
-   font-size: 17px;
-   font-weight: bold;
-   color: rgb(41, 41, 41);
-}
-
-.table_td {
-   width: 300px;
-   padding-top: 1%;
-   padding-bottom: 1%;
+.css_inquiries_input {
+   text-align: left;
+   width: 26%;
+   padding: 1% 1% 1%;
+   border: 1px solid #dbdbdb;
+   background-color: #fff;
+   border-radius: 4px;
+   box-sizing: border-box;
    font-size: 15px;
-   color: rgb(41, 41, 41);
+   transition: border-color .1s, background-color .1s;
+   resize: none;
+   -webkit-appearance: none;
 }
 
-hr {
-   width: 80%;
+.css_input_btn {
+   width: 26%;
+   height: auto;
+   margin-bottom: 2%;
+   padding: 8px 8px 8px 8px;
+   border: 1px solid #dbdbdb;
+   background-color: #00C892;
+   border-radius: 4px;
+   box-sizing: border-box;
+   align-items: center;
+   font-weight: 700;
+   font-size: 15px;
+   line-height: 21px;
+   transition: border-color .1s, background-color .1s;
+   resize: none;
+   -webkit-appearance: none;
 }
 
-thead {
-   border-bottom: 0.2px solid;
-   border-color: #dbdbdb;
-}
-
-.page-num {
-   margin-top: 15px;
-}
-
-.page-num oi {
-   width: 36px;
-   height: 35px;
-}
-
-.num {
-   position: relative;
-   height: 33px !important;
-   margin-left: 5px;
-   margin-right: 5px;
-   border: none;
-}
-
-.num>span {
-   font-weight: bold;
-   position: relative;
-   top: 2px;
-}
-
-footer {
-   color: black;
-   margin-top: 15%;
+.inquiriesExample {
+   color: grey;
+   padding-top: 13%;
    font-size: 12px;
 }
 
 h2 {
-   text-align: center;
    margin-top: 1%;
    display: block;
    font-size: 25px;
@@ -122,21 +100,30 @@ h2 {
    word-break: keep-all;
 }
 
-.row2 {
-   text-align: center;
-   width: 100%;
-   margin-left: 12%;
+#inquiriesTitle {
+   margin-top: 2%;
 }
 
-.mainLogo {
-   font-family: 'Gugi', cursive;
-   color: #111;
-   font-size: 55px;
+#searchButton {
+   color: #757575;
 }
 
-#myPageDiv {
-   border-top: 1px solid #ebebeb;
-   text-align: center;
+#search {
+   text-align: left;
+   width: 80%;
+   border: 1px solid #dbdbdb;
+   background-color: #fff;
+   border-radius: 20px 20px 20px 20px;
+   box-sizing: border-box;
+   font-size: 15px;
+   transition: border-color .1s, background-color .1s;
+   resize: none;
+   -webkit-appearance: none;
+}
+
+.aTag {
+   text-decoration: none;
+   color: black;
 }
 
 .layout-navigation-bar-login__item {
@@ -152,45 +139,11 @@ h2 {
    color: #757575;
 }
 
-.css_input_userInfo {
-   text-align: left;
-   width: 80%;
-   border: 1px solid #dbdbdb;
-   background-color: #fff;
-   border-radius: 20px 20px 20px 20px;
-   box-sizing: border-box;
-   font-size: 15px;
-   transition: border-color .1s, background-color .1s;
-   resize: none;
-   -webkit-appearance: none;
-}
-#searchButton {
-   color: #757575;
-}
-#search{
-   text-align: left;
-   width: 80%;
-   border: 1px solid #dbdbdb;
-   background-color: #fff;
-   border-radius: 20px 20px 20px 20px;
-   box-sizing: border-box;
-   font-size: 15px;
-   transition: border-color .1s, background-color .1s;
-   resize: none;
-   -webkit-appearance: none;
-}.mainLogo {
+.mainLogo {
    font-family: 'Gugi', cursive;
    color: #111;
    font-size: 55px;
    text-decoration: none;
-}
-section div {
-   width: 80%;
-   height: auto;
-   text-align: center;
-   margin-left: 10%;
-   border: 1px dashed #dbdbdb;
-   border-radius: 30px/30px;
 }
 
 a:link {
@@ -208,6 +161,7 @@ a:hover {
    color: #00C892;
    text-decoration: none;
 }
+
 footer {
    width: auto;
    height: auto;
@@ -216,7 +170,7 @@ footer {
 </style>
 </head>
 <body>
-   <!-- Header Section Begin -->
+<!-- Header Section Begin -->
    <header class="header-section">
       <div class="hs-top">
          <div class="container">
@@ -287,10 +241,11 @@ footer {
                      <!-- 검색기능 -->
                      <form action="">
                         <input class="css_input_userInfo" type="text" id="search"
-                           name="search" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search">
+                           name="search"
+                           placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search">
                         <!-- 검색 -->
-                        <input class="fas fa-search fa-lg" id="searchButton" type="button" id="" onclick=""
-                           value="검색">
+                        <input class="fas fa-search fa-lg" id="searchButton"
+                           type="button" id="" onclick="" value="검색">
                      </form>
                   </div>
                </div>
@@ -313,7 +268,7 @@ footer {
                         <!-- 장바구니 -->
                         <li><a href="cart?s_id=${s_ID }">장바구니</a></li>
                         <!-- 시공문의내역 -->
-                        <li><a href="myInquiries?s_id=${s_ID }">문의내역</a></li>
+                        <li><a href="myInquiries?s_id=${s_ID }">시공문의</a></li>
                         <!-- 판매자등록 -->
                         <li><a href="companyRegistration">시공업체등록</a></li>
                         <!-- 문의하기 -->
@@ -326,141 +281,46 @@ footer {
       </div>
       <!-- 마이페이지 네비게이션 끝 -->
    </header>
-   <!-- Header End -->
-   <!-- section begin -->
-   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-   <script type="text/javascript">
-      function conListAll(user_Nickname){
-         $.ajax({
-            url : "/conList",
-            type : "post",
-            data : {
-               'user_Nickname':user_Nickname
-            },
-            success : function(data) {
-               var html = "";
-               for(i in data){
-               html += ' <tr> ';
-               html += ' <td class="table_td">'+data[i].reply_Check+'<!-- 번호 --></td> ';
-               html += ' <td class="table_td"><c:if test="'+(data[i].reply_Check)+'==1">▶</c:if><a href="InquiriesCompany?cd_id='+data[i].cd_Id+'"><mark>'+data[i].cd_Title+'</mark></a><!-- 제목 --></td> ';              
-               html += ' <td class="table_td">'+data[i].user_Nickname+'<!-- 작성자 --></td> ';
-               html += ' <td class="table_td">'+data[i].cd_Bdate+'<!-- 작성일 --></td> ';
-               html += ' </tr> ';                  
-               }
-               $("#AllConIq").html(html);
-            },
-            error : function() {
-               alert("error");
-            }
-         });
-      }
-   </script>
-   <h2>시공문의내역</h2>
+   <div class="main_wrap">
    <section>
-   <div>
-      <table>
-         <thead>
-            <tr>
-               <th class="table_th">답변현황</th>
-               <th class="table_th">제목</th>
-               <th class="table_th">작성자</th>
-               <th class="table_th">작성일</th>
-            </tr>
-         </thead>
-         <tbody id="AllConIq">
-            <!-- for문############################################## -->
-            <c:forEach items="${Ilist }" var="cIVo" end="3" >
-               <tr>
-                  <td class="table_td">${cIVo.reply_Check} <!-- 번호 --></td>
-                  <td class="table_td"><c:if test="${cIVo.cd_Bstep == 1}">▶</c:if><a href="InquiriesCompany?cd_id=${cIVo.cd_Id}"><mark>${cIVo.cd_Title}</mark></a><!-- 제목 --></td>
-                  <%-- <td class="table_td"><mark>${cIVo.cd_Title} </mark><!-- 제목 --></td> --%>
-                  <td class="table_td">${cIVo.user_Nickname} <!-- 작성자 --></td>
-                  <td class="table_td">${cIVo.cd_Bdate} <!-- 작성일 --></td>
-               </tr>
-            </c:forEach>
-         </tbody>
-         <!-- for문############################################## -->
-      </table>
-   </div>
-   <a href="javascript:void(0);" onclick="conListAll('${session_nickName}'); "><span>더보기</span></a>
+      <form action="questionOk" method="post">
+         <h2>고객센터 문의하기</h2>
+         <span class="inquiriesExample">고객센터관련 문의사항만 접수가능합니다.</span>
+         <p />
+         <input class="css_inquiries_input" type="text" id="inquiriesTitle"
+            name="ud_Title" placeholder="제목을 입력해주세요." required>
+         <p />
+         <textarea class="css_inquiries_input" id="inquiriesContent"
+            name="ud_Content" rows="5%" cols="10%" placeholder="문의내용을 입력해주세요."
+            required></textarea>
+         <p />
+         <input type="hidden" name="user_Nickname"
+            value="${session_nickName }"> 
+         <input class="css_input_btn"
+            type="submit" value="문의하기" onclick="">
+         <p />
+      </form>
    </section>
-   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-   <script type="text/javascript">
-      function userListAll(user_Nickname){
-         $.ajax({
-            url : "/userList",
-            type : "post",
-            data : {
-               'user_Nickname':user_Nickname
-            },
-            success : function(data) {
-               var html = "";
-               for(i in data){
-               html += ' <tr> ';
-               html += ' <td class="table_td">'+data[i].reply_Check+'<!-- 번호 --></td> ';
-               html += ' <td class="table_td"><c:if test="'+(data[i].reply_Check)+'==1">▶</c:if><a href="InquiriesUser?ud_id='+data[i].ud_Id+'"><mark>'+data[i].ud_Title+'</mark></a><!-- 제목 --></td> ';
-               html += ' <td class="table_td">'+data[i].user_Nickname+'<!-- 작성자 --></td> ';
-               html += ' <td class="table_td">'+data[i].ud_Bdate+'<!-- 작성일 --></td> ';
-               html += ' </tr> ';                  
-               }
-               $("#AllUserIq").html(html);
-            },
-            error : function() {
-               alert("error");
-            }
-         });
-      }
-   </script>
-   <h2>일반문의내역</h2>
-   <section>
-   <div>
-      <table>
-         <thead>
-            <tr>
-               <th class="table_th">답변현황</th>
-               <th class="table_th">제목</th>
-               <th class="table_th">작성자</th>
-               <th class="table_th">작성일</th>
-            </tr>
-         </thead>
-         <tbody id="AllUserIq">
-            <!-- for문############################################## -->
-            <c:forEach items="${Ulist }" var="uIVo" end="3" >
-               <tr>
-                  <td class="table_td">${uIVo.reply_Check} <!-- 번호 --></td>
-                  <td class="table_td"><c:if test="${uIVo.ud_Bstep == 1}">▶</c:if><a href="InquiriesUser?ud_id=${uIVo.ud_Id}"><mark>${uIVo.ud_Title} </mark></a>
-                     <!-- 제목 --></td>
-                  <td class="table_td">${uIVo.user_Nickname} <!-- 작성자 --></td>
-                  <td class="table_td">${uIVo.ud_Bdate} <!-- 작성일 --></td>
-               </tr>
-            </c:forEach>
-            
-         </tbody>
-         <!-- for문############################################## -->
-      </table>
-   </div>
-      <a href="javascript:void(0);" onclick="userListAll('${session_nickName}'); "><span>더보기</span></a>
-   </section>
-         <!-- top -->
-      <a
-         style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer;"
-         href="#" title="top"> <i class="fas fa-arrow-circle-up"
-         style="width: 2em; height: 2em;"></i></a>
-      <!-- top -->
-         <!-- Footer Section Begin -->
-      <footer>
-         <pre
-            style="color: rgb(107, 107, 107); font-size: 0.7em; text-align: left;">
+   <!-- top -->
+   <a
+      style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer;"
+      href="#" title="top"> <i class="fas fa-arrow-circle-up"
+      style="width: 2em; height: 2em;"></i></a>
+   <!-- top -->
+   <!-- Footer Section Begin -->
+   <footer>
+      <pre
+         style="color: rgb(107, 107, 107); font-size: 0.7em; text-align: left;">
       
          <span style="font-weight: 700; font-size: 6em;">1670-0876</span><a
-               href=""><i class="fab fa-apple"
-               style="margin-left: 35%; width: 4em; height: 4em;"></i></a><a href=""><i
-               class="fab fa-google-play"
-               style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
-               class="fab fa-facebook"
-               style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
-               class="fab fa-instagram"
-               style="margin-left: 2%; width: 4em; height: 4em;"></i></a>
+            href=""><i class="fab fa-apple"
+            style="margin-left: 35%; width: 4em; height: 4em;"></i></a><a href=""><i
+            class="fab fa-google-play"
+            style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
+            class="fab fa-facebook"
+            style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
+            class="fab fa-instagram"
+            style="margin-left: 2%; width: 4em; height: 4em;"></i></a>
          <span style="font-size: 2em;">평일 09:00 ~ 18:00 (주말 & 공휴일 제외)</span>
          
          <span>브랜드 스토리회사소개채용정보이용약관개인정보처리방침공지사항고객센터고객의 소리전문가 등록사업자 구매회원제휴/광고 문의입점신청 문의</span>
@@ -472,7 +332,8 @@ footer {
          <span>Copyright 2021. bucketplace, Co., Ltd. All rights reserved [ developer : TeamSpace ]</span>
          
       </pre>
-      </footer>
+   </footer>
    <!-- Footer Section End -->
+   </div>
 </body>
 </html>

@@ -27,6 +27,12 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script type="text/javascript">
+	/* location.reload(true); */
+	var interval = setTimeout(function () {
+		location.reload(); 
+		}, 2000);
+</script>
 
 <style type="text/css">
 body {
@@ -262,6 +268,11 @@ aside, #aside2 {
 	font-size: 55px;
 	text-decoration: none;
 }
+.user_Img {
+	border-radius: 100%;
+    width: 56%;
+    height: auto;
+}
 
 a:link {
 	color: black;
@@ -338,11 +349,11 @@ footer {
 								<!-- 홈 -->
 								<li><a href="store1">스토어</a></li>
 								<!-- 스토어 -->
-								<li><a href="company">시공업체</a></li>
+								<li><a href="companyMain">시공업체</a></li>
 								<!-- 시공업체 -->
 								<!-- <li><a href="interiorInquiries">시공문의</a></li> -->
 								<!-- 시공업체상세페이지 -->
-								<li><a href="community">커뮤니티</a></li>
+								<li><a href="communityMain">커뮤니티</a></li>
 								<!-- 커뮤니티 -->
 								<li><a href="event">이벤트</a></li>
 								<!-- 이벤트 -->
@@ -374,17 +385,20 @@ footer {
                     <div class="col-lg-9">
                         <nav class="nav-menu">
                             <ul>
-                                <li class="active"><a href="myPage?nickname=${session_nickName }">마이페이지</a></li>
+                                <!-- 마이페이지 -->
+								<li class="active"><a href="myPage?nickname=${session_nickName }">마이페이지</a></li>
 								<!-- 홈 -->
 								<li><a href="userInfoModify?s_id=${s_ID }">회원정보수정</a></li>
 								<!-- 구매내역 -->
 								<li><a href="buyDetails?s_id=${s_ID }">구매내역</a></li>
-								<!-- 시공문의내역 -->
-								<li><a href="myInquiries?s_id=${s_ID }">시공문의</a></li>
 								<!-- 장바구니 -->
 								<li><a href="cart?s_id=${s_ID }">장바구니</a></li>
+								<!-- 시공문의내역 -->
+								<li><a href="myInquiries?s_id=${s_ID }">문의내역</a></li>
 								<!-- 판매자등록 -->
 								<li><a href="companyRegistration">시공업체등록</a></li>
+								<!-- 문의하기 -->
+								<li><a href="serviceCenter">고객센터</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -394,14 +408,16 @@ footer {
         </header>
     <!-- 마이페이지 네비게이션 끝 -->
     <section>
-    <!-- 사용자 사진 등록시 enctyped을 위해 form을 사용해야하는지 -->
-    	<form action="" method="post" id="myPageForm">
-    	</form>
-    <!-- 사용자 사진 등록시 enctyped을 위해 form을 사용해야하는지 -->
-    
     	<div id="mypageUserBox"><!-- 마이페이지 유저시진 닉네임 박스 1 -->
     		<div id="mypageUserBox2"><!-- 마이페이지 유저시진 닉네임 박스 2 -->
-    			<img alt="userImg" src="../img/mypage/mypageImg.png"><hr><!-- id기준 저장위치 및 파일명 등록 -->
+    			<c:if test="${userVo eq null }">
+                	<img class="user_Img" alt="userImg" src="../img/mypage/mypageImg.png">
+	             </c:if>
+	             <c:if test="${userVo ne null }">
+	                <img class="user_Img" alt="userImg" src="userImg/${userVo.user_Main }">
+	             </c:if>
+	    			
+    			<hr><!-- id기준 저장위치 및 파일명 등록 -->
     			<div id="mypageUserNickname"><!-- 마이페이지 유저시진 닉네임 박스 3 -->
     				<span>${session_nickName}</span>
 					<div><!-- 마이페이지 유저시진 닉네임 박스 4 -->
@@ -411,14 +427,54 @@ footer {
     		</div>
     	</div>		
     </section>
+    <!-- 고객문의 내역 -->
+ 	<div id="asideDiv">일반문의내역</div>
+    <aside>
+    	<div id="asideDiv1">
+	    	<c:if test="${Ulist!=null}">
+	    		<c:forEach items="${Ulist }" var="uIVo" end="2">
+		    		
+		    		<span id="asideSpan1">
+		    			${uIVo.reply_Check }
+		    		</span>
+	    			<span id="asideSpan2">
+	    				${uIVo.ud_Title }
+		    		</span>
+		    		<span id="asideSpan3">
+		    			${uIVo.user_Nickname }
+		    		</span>
+		    		<span id="asideSpan4">
+		    			${uIVo.ud_Bdate }
+		    		</span>
+		    		<br>
+	    		
+	    		</c:forEach>
+	    	</c:if>
+	    	<c:if test="${Ulist.size() == 0}">
+	    		<span id="asideSpan1">
+	    			<span id="asideSpan2">
+			    		<span id="asideSpan3">
+			    			문의내역이 없습니다.
+				    		<span id="asideSpan4">
+				    		</span>
+			    		</span>
+		    		</span>
+	    		</span>
+	    	</c:if>
+	    	
+    	</div>
+    </aside>
+    <!-- 고객문의 내역 끝 -->
+    
+    <!-- 시공문의 내역 -->
  	<div id="asideDiv">시공문의내역</div>
     <aside>
     	<div id="asideDiv1">
-	    	<c:if test="${list!=null}">
-	    		<c:forEach items="${list }" var="cIVo" end="4">
+	    	<c:if test="${Ilist!=null}">
+	    		<c:forEach items="${Ilist }" var="cIVo" end="2">
 		    		
 		    		<span id="asideSpan1">
-		    			${cIVo.cd_Id }
+		    			${cIVo.reply_Check }
 		    		</span>
 	    			<span id="asideSpan2">
 	    				${cIVo.cd_Title }
@@ -433,7 +489,7 @@ footer {
 	    		
 	    		</c:forEach>
 	    	</c:if>
-	    	<c:if test="${list.size() == 0}">
+	    	<c:if test="${Ilist.size() == 0}">
 	    		<span id="asideSpan1">
 	    			<span id="asideSpan2">
 			    		<span id="asideSpan3">
@@ -447,23 +503,47 @@ footer {
 	    	
     	</div>
     </aside>
+    <!-- 시공문의 내역 끝 -->
+    
+    <!-- 댓글 부분 -->
  	<div id="asideDiv2">작성댓글</div>
     <aside id="aside2">
     	<div id="asideDiv1">
-    		<span id="asideSpan1">
-    			1<!-- 작성댓글번호  -->
-    			<span id="asideSpan2">
-    				작성댓글내용<!-- 작성댓글내용 -->
+    		<c:if test="${Elist!=null}">
+	    		<c:forEach items="${Elist }" var="eLVo" end="2">
+		    		
+		    		<span id="asideSpan1">
+		    			${eLVo.event_no }
+		    		</span>
+	    			<span id="asideSpan2">
+	    				${eLVo.event_content }
+		    		</span>
 		    		<span id="asideSpan3">
-		    			작성댓글작성자<!-- 작성댓글작성자 -->
-			    		<span id="asideSpan4">
-			    			작성댓글작성일 <!-- 작성댓글작성일 -->
+		    			${eLVo.user_nickname }
+		    		</span>
+		    		<span id="asideSpan4">
+		    			${eLVo.event_date }
+		    		</span>
+		    		<br>
+	    		
+	    		</c:forEach>
+	    	</c:if>
+    		<c:if test="${Elist.size() == 0}">
+	    		<span id="asideSpan1">
+	    			<span id="asideSpan2">
+			    		<span id="asideSpan3">
+			    			작성한 댓글이 없습니다.
+				    		<span id="asideSpan4">
+				    		</span>
 			    		</span>
 		    		</span>
 	    		</span>
-    		</span>
+	    	</c:if>
+    		
     	</div>
     </aside>
+    
+    <!-- 댓글 부분 끝 -->
     		<!-- top -->
 		<a
 			style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer;"

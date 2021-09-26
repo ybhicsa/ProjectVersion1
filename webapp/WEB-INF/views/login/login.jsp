@@ -27,7 +27,7 @@ body {
 }
 
 .css_input_userIDPW {
-	width: 320px;
+	width: 26.5em;
 	border: 1px solid #dbdbdb;
 	background-color: #fff;
 	border-radius: 4px;
@@ -89,20 +89,75 @@ footer {
 	height: 17em;
 	background: rgb(226, 226, 226);
 }
+.login_text{
+	color:  red;
+	font-weight: 400;
+}
+.text_add{
+	text-align: center;
+	color: red;
+	font-size: 13px;
+}
 </style>
+					
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
+		
+			
+		   $(function(){
+			   	/*비밀번호 12글자이상  */
+			  	 $("#in_userPw").keyup(function(){
+					  console.log($("#in_userPw").val());
+					  console.log($("#in_userPw").val().length);
+					  var tlength=$("#in_userPw").val();
+					  
+					   if(tlength.length<8){
+						  $("#add_text2").text("영문,숫자를 포함한 8자리 이상 입력해주세요.");
+					  }else{
+						  $("#add_text2").text(""); 
+					  }
+				  })
+			   
+				   /*아이디 4글자이상 8글자이하 이메일 형태  */
+					  $("#in_userEmail").keyup(function(){
+						  console.log($("#in_userEmail").val());
+						  console.log($("#in_userEmail").val().length);
+						  var tlength=$("#in_userEmail").val();
+						  
+						  
+						  
+						   if(tlength.length<4 ){
+							  $("#add_text").text("영문자 4~20자 이하로 입력해주세요.");
+						  }else {
+							  $("#add_text").text(""); 
+						  }
+						  
+					  })
+					 
+			  
+				   
+				   
+			   });
+		
 			function login_check(){
-				//alert("test");
+				/* alert("test"); */
 				
 				var idCheck=/^[a-z A-Z 0-9\-_]+@[a-z A-Z 0-9\-]+(\.[a-z A-Z 0-9 \-]+)+$/; 
 				var pwCheck=/^[a-zA-Z0-9]{4,20}$/;  
 				
+				 var idAdd = document.getElementById("add_text");
+		         
+				
 				//변수idCheck와 id전달값 비교
 				if(idCheck.test($("#in_userEmail").val())==false){
-					alert("ID 입력값이 잘못되었습니다. 다시 입력하세요.");
-					$("#in_userEmail").focus();
-					return false;
+					idAdd.innerHTML = "<br><b class='login_text'>ID 를 확인하시고 다시 입력해주세요.<b>";
+	                 return false;
+				 	}else if (!/^[a-z A-Z 0-9\-_]+@[a-z A-Z 0-9\-]+(\.[a-z A-Z 0-9 \-]+)+$/.test($("#in_userEmail").val())) {
+	                 idAdd.innerHTML = "영문자 4~20자 이하로 입력해주세요.";
+	                 return false;
+					/* alert("ID 입력값이 잘못되었습니다. 다시 입력하세요."); */
+					/* $("#in_userEmail").focus();
+					return false; */
 				}
 				
 				//변수pwCheck와 pw전달값 비교
@@ -112,30 +167,33 @@ footer {
 					return false;
 				}
 				
-				return $("#loginForm").submit();
+				return $("#loginForm").submit(); 
 		
 				
 			}
+			
+			
 			
 		</script>
 		
 	</head>
 	<body>
 <body>
-	<div class="main">
+	<div class="main" >
 		<div id="mainLogoDiv"></div><a href="index"><span class="mainLogo">공간</span></a></div>
 		<section>
-			<form action="login" method="post">
+			<form action="login" method="post" id="loginForm">
 				<div id="login_input">
 					<div>
-						<input class="css_input_userIDPW" type="text" id="in_userEmail" name="in_userEmail" placeholder="이메일">
-					</div>
-					<div>
+						<input class="css_input_userIDPW" type="text" id="in_userEmail" name="in_userEmail" placeholder="이메일"><br>
 						<input class="css_input_userIDPW" type="password" id="in_userPw" name="in_userPw" placeholder="비밀번호">
 					</div>
+						<span id="add_text" class="text_add"><!-- <br>토글기능x 아니었음 --></span><br>
+						<span id="add_text2" class="text_add"><!-- <br>토글기능x 아니었음 --></span>
 				</div>
 				<p />
-				<input class="css_input_btn" type="submit" value="로그인">
+				<input class="css_input_btn" type="button" onclick="login_check()" value="로그인"> 
+				<!-- <input class="css_input_btn" type="button" onclick="$('.text_add').toggle()" value="로그인"> -->
 				<p />
 				<!-- 버튼에 이미지넣을것 -->
 			</form>

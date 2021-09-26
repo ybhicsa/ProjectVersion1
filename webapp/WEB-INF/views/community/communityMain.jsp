@@ -11,8 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+
+
 
 <title>공간, 현명한 인테리어</title>
 <!-- Google Font -->
@@ -35,8 +36,108 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/store.css" type="text/css">
 <link rel="stylesheet" href="css/store2.css" type="text/css">
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+
 <style type="text/css">
+/*글쓰기,좋아요,댓글 css 관련 시작*/
+		.heart {
+		  width: 100px;
+		  height: 100px;
+		  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+		  background-position: 0 0;
+		  cursor: pointer;
+		  transition: background-position 1s steps(28);
+		  transition-duration: 0s;
+		  float: right;
+    	  margin: 24px;}
+		  
+		.is-active {
+		    transition-duration: 1s;
+		    background-position: -2800px 0;
+		  }
+		}
+		
+		.placement {
+		  position: fixed;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		} 
+		.heart2 {
+		  width: 100px;
+		  height: 100px;
+		  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+		  background-position: 0 0;
+		  cursor: pointer;
+		  transition: background-position 1s steps(28);
+		  transition-duration: 0s;
+		  float: right;
+    	  margin: 24px;}
+		  
+		.is-active {
+		    transition-duration: 1s;
+		    background-position: -2800px 0;
+		  }
+		}
+		
+		.placement {
+		  position: fixed;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		}
+		
+		.heart3 {
+		  width: 100px;
+		  height: 100px;
+		  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+		  background-position: 0 0;
+		  cursor: pointer;
+		  transition: background-position 1s steps(28);
+		  transition-duration: 0s;
+		  float: right;
+    	  margin: 24px;}
+		  
+		.is-active {
+		    transition-duration: 1s;
+		    background-position: -2800px 0;
+		  }
+		}
+		
+		.placement {
+		  position: fixed;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		}
+		/*하트 끝*/
+		.property-comments-span{
+			font-size: xx-large;
+			width: 100px;
+		    float: right;
+		    margin: 50px;
+		}
+		/* 사진 하단 닉네임,제목 표현 css */		
+		.pi-title{text-align: center;}
+		.pi-nick{color: rgb(53, 197, 240);}
+		.pi-text-title{font-size: 20px;
+				    font-family: "Montserrat", sans-serif;
+				    font-weight: 700;
+		}		
+		.cwrite{width: 54%; 
+   			 	text-align: right;}	
+		.cwrite2{
+			    padding: 11px 45px 12px;
+			    background-color: rgb(53, 197, 240);
+			    color: white;
+			    font-size: 16px;
+			    font-weight: 700;
+			    /* line-height: 22px; */
+			    border-radius: 12px;}
+		/*글쓰기,좋아요,댓글 css 관련 끝*/
 header {
 	position: fixed;
 	width: 100%;
@@ -63,10 +164,29 @@ header {
 	align-items: flex-end;
 }
 
+.property-like-comments{
+	text-align: -webkit-center;
+    height: 100px;
+    border-bottom: ridge;}
 .property-item .pi-pic {
 	margin: auto;
 }
 
+.css_input_btn {
+   width: 15%;
+   padding: 8px 8px 8px 8px;
+   border: 1px solid #dbdbdb;
+   background-color: #00C892;
+   border-radius: 20px/20px;
+   box-sizing: border-box;
+   align-items: center;
+   font-weight: 700;
+   font-size: 15px;
+   line-height: 21px;
+   transition: border-color .1s, background-color .1s;
+   resize: none;
+   -webkit-appearance: none;
+}
 .event-menu {
 	text-align: center;
 	width: auto;
@@ -150,6 +270,21 @@ a:hover {
 	/* color: skyblue; */
 	color: #00C892;
 	text-decoration: none;
+}
+.imgHover {
+   overflow: hidden;
+   border-radius: 20px/20px;
+   display: block;
+   position: static;
+   width: 100%;
+   height: 16%;
+}
+.imgHover img {
+   transition: all 0.4s linear;
+}
+
+.imgHover:hover img {
+   transform: scale(1.2);
 }
 footer {
 	width: auto;
@@ -292,7 +427,7 @@ footer {
 	</section>
 	<!-- 메인페이지 상단이미지 -->
 
-
+	
 	<!-- Property Section Begin -->
 	<section class="property-section latest-property-section spad">
 		<div class="container">
@@ -301,57 +436,110 @@ footer {
 					<div class="section-title">
 						<h4 class="menu-category">오늘의 스토리</h4>
 					</div>
+					<div style="margin-bottom: 3%;">
+						<span class="cwrite"><!-- col-lg-7 -->                    	
+			                <a href="communityWrite" class="communitywrite"><button class="css_input_btn">글쓰기</button></a>                                    
+			            </span>
+		            </div>
 				</div>
-
 			</div>
+			
 			<div class="row property-filter">
-				<a href="communityDetails">
-					<div class="col-lg-4 col-md-6 mix all furniture">
-						<div class="property-item">
-							<div class="pi-pic set-bg"
-								data-setbg="images/community/cbody1.jpg"></div>
-							<div class="pi-text">
-								<h5 style="text-align: center;">자취 17년차 언니의 내집 마련기</h5>
-								<p>
-									<a href="communityDetails">나혼산클로이홈(닉네임)</a>
-								</p>
+			
+			
+			<!-- 포문 시작부분  -->
+			<c:forEach items="${Clist }" var="Clist">
+			
+				<div class="col-lg-4 col-md-6 mix all furniture">
+	                    <div class="property-item">
+		                    <a href="communityDetails?com_Num=${Clist.com_Num } ">
+		                    	<div class="imgHover">
+		                    		<img class="pi-pic set-bg" alt="" src="communityImg/${Clist.com_Img1 }" style="width: 100%;">              
+			                    </div>
+		                    </a>
+	                     	<div class="property-like-comments">
+							<div class="placement">
+							  <div class="heart"></div>
 							</div>
-						</div>
-					</div>
-				</a> <a href="communityDetails">
-					<div class="col-lg-4 col-md-6 mix all furniture">
-						<div class="property-item">
-							<div class="pi-pic set-bg"
-								data-setbg="images/community/cbody2.jpg"></div>
-							<div class="pi-text">
-								<h5>오래도록 편안하게,자연스러운 주택 살이</h5>
-								<p>
-									<a href="communityDetails">안젤라랄라(닉네임)</a>
-								</p>
 
-							</div>
-						</div>
-					</div>
-				</a> <a href="store2">
-					<div class="col-lg-4 col-md-6 mix all appliances">
-						<div class="property-item">
-							<div class="pi-pic set-bg"
-								data-setbg="images/community/cbody3.jpg"></div>
-							<div class="pi-text">
-
-								<h5>반셀프로 완성한 30평대 신혼집</h5>
-								<p>
-									<a href="#">songsong(닉네임)</a>
-								</p>
-
-							</div>
-						</div>
-					</div>
-				</a>
+	                        	<a href="communityDetails?com_Num=${Clist.com_Num }#comment1-head-id"><span class="property-comments-span" title="댓글"><i class="fas fa-comments"></i></span></a> 
+	                       	</div>
+		                        <div class="pi-text">	                     
+		                           <a href="communityDetails"><p class="pi-nick">${Clist.user_Nickname }</p></a>		                                                       
+		                        </div>
+		                        <div class="pi-title">
+		                           <h5 class="pi-text-title">${Clist.com_Title }</h5>
+		                        </div>
+	                     </div>
+	                </div>
+			
+			</c:forEach>
+				
+				
+				<!-- <div class="col-lg-4 col-md-6 mix all furniture">
+	                    <div class="property-item">                
+	                    	<a href="communityDetails">
+	                    		<div class="pi-pic set-bg" data-setbg="images/community/cbody2.jpg"></div>
+	                        </a>
+	                        <div class="property-like-comments">
+							<div class="placement">
+							  <div class="heart2"></div>
+							</div>	
+	                        	<a href="communityDetails#comment1-head-id"><span class="property-comments-span" title="댓글"><i class="fas fa-comments"></i></span></a> 
+	                       	</div>
+		                        
+		                        <div class="pi-text">	                     
+		                           	<a href="communityDetails"><p class="pi-nick">안젤라랄라(닉네임)</p></a>
+		                        </div>
+		                        <div class="pi-title">
+		                        	<h5 class="pi-text-title">오래도록 편안하게,자연스러운 주택살이</h5>
+		                        </div>    		                            	                           
+	                     </div>
+	                </div> 
+				
+				<div class="col-lg-4 col-md-6 mix all appliances">
+	                    <div class="property-item">
+	                    	<a href="communityDetails">
+       							<div class="pi-pic set-bg" data-setbg="images/community/cbody3.jpg"></div>
+       						</a>
+	                        <div class="property-like-comments">
+							<div class="placement">
+							  <div class="heart3"></div>
+							</div>	
+	                        	<a href="communityDetails#comment1-head-id"><span class="property-comments-span" title="댓글"><i class="fas fa-comments"></i></span></a> 
+	                       	</div>
+	                        <div class="pi-text">	                            
+	                           <a href="communityDetails"><p class="pi-nick">songsong(닉네임)</p></a>	                            
+	                        </div>
+	                        <div class="pi-title">
+	                           <h5 class="pi-text-title">반셀프로 완성한 30평대 신혼집</h5>	                           
+	                        </div>    	                           
+	                    </div>
+	                </div> -->
 
 			</div>
 		</div>
 	</section>
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		  $(".heart").on("click", function() {
+		    $(this).toggleClass("is-active");
+		  });
+		});
+	$(function() {
+		  $(".heart2").on("click", function() {
+		    $(this).toggleClass("is-active");
+		  });
+		});
+	$(function() {
+		  $(".heart3").on("click", function() {
+		    $(this).toggleClass("is-active");
+		  });
+		});
+	
+	</script>
+	
 	<!-- Property Section End -->
 			<!-- top -->
 		<a
@@ -396,6 +584,8 @@ footer {
 	<script src="js/jquery.richtext.min.js"></script>
 	<script src="js/image-uploader.min.js"></script>
 	<script src="js/main.js"></script>
+	
+	
 </body>
 
 </html>

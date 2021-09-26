@@ -107,9 +107,9 @@ a:hover {
    font-size: 13px;   
 }
 footer {
-	width: auto;
-	height: auto;
-	background: rgb(226, 226, 226);
+   width: auto;
+   height: auto;
+   background: rgb(226, 226, 226);
 }
 </style>
 
@@ -154,8 +154,8 @@ footer {
          if (!idresult) {
               idAdd.innerHTML = "필수 정보입니다.<br>";
                  return false;
-              }else if (!/^[a-zA-Z0-9_]{4,12}$/.test(idresult)) {
-                 idAdd.innerHTML = "영문 소문자 4글자 이상 8글자 이하로 입력하셔야 합니다.";
+              }else if (!/^[a-zA-Z0-9_]{4,20}$/.test(idresult)) {
+                 idAdd.innerHTML = "영문자 4~20자리 이하로 입력하셔야 합니다.";
                  return false;
               }/*html 추가 소스 id */
           
@@ -237,8 +237,44 @@ footer {
               else{
                   $("#joinForm").submit(); 
               }
-           
        }//function
+       //이메일 인증 버튼 클릭시 버튼 전환
+       //넘어오는 데이터를 받을 변수
+       var pwCode = "";
+       function emailCheck(){
+          var html = "";
+         $("#sss").html(html);
+          $("#emailCheckDiv").append('<span id="emailCheckBtn"><input type="text" class="css_input_userInfo" id="pwCode" name="" placeholder="인증번호를 입력해주세요."><p/><input type="button" class="css_input_btn" value="인증하기" onclick="emailCheck2()"></span>');
+          
+          $.ajax({
+            url:"emailCheck",
+            type:"post",
+            data:{  //넘길 데이터
+               "user_email":$("#user_email").val(),
+               "email2":$("#email2").val()
+            },
+            success:function(data){ //이메일 발송성공!
+               alert("입력한 이메일로 이메일인증\n 비밀번호를 발송하였습니다.");
+               pwCode = data;
+            	
+            },
+            error:function(){  //실패시
+               alert("error");
+            }
+                
+            });//ajax 끝
+         }
+       
+       //인증하기 버튼 클릭시 비교
+       function emailCheck2(){
+          if($("#pwCode").val() == pwCode){
+             var html = "";
+             $("#emailCheckBtn").html(html);
+              $("#emailCheckDiv").append("<input type='button' class='css_input_btn' value='인증완료' style='background-color: #01f8ff'>");
+          }else{
+             alert("error");
+          }
+       }
     </script>
 
 </head>
@@ -267,6 +303,10 @@ footer {
       </select>
       <p />
       <span id="add_text" class="text_add"></span>
+      <span id="sss">
+         <button class="css_input_btn" type="button" value="emailCheck" onclick="emailCheck()" id="emailCheck_btn" name="emailCheck_btn">이메일인증</button>
+      </span>
+      <div id="emailCheckDiv"></div>
       <label class="joinUserInfo">비밀번호</label> <span class="joinExample">영문,
          숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</span>
       <p />
@@ -305,35 +345,34 @@ footer {
       </div>
       <p />
       <!-- <input class="css_input_btn" type="submit" value="회원가입하기" onclick="memberJoinForm()"> -->
-      <button class="css_input_btn" type="button" value="회원가입하기"
-         onclick="memberJoinForm()" id="join_btn" name="join_btn">회원가입하기</button>
+      <button class="css_input_btn" type="button" value="회원가입하기" onclick="memberJoinForm()" id="join_btn" name="join_btn">회원가입하기</button>
    </form>
-   		<!-- Footer Section Begin -->
-		<footer>
-			<pre
-				style="color: rgb(107, 107, 107); font-size: 0.7em; text-align: left;">
-		
-			<span style="font-weight: 700; font-size: 6em;">1670-0876</span><a
-					href=""><i class="fab fa-apple"
-					style="margin-left: 35%; width: 4em; height: 4em;"></i></a><a href=""><i
-					class="fab fa-google-play"
-					style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
-					class="fab fa-facebook"
-					style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
-					class="fab fa-instagram"
-					style="margin-left: 2%; width: 4em; height: 4em;"></i></a>
-			<span style="font-size: 2em;">평일 09:00 ~ 18:00 (주말 & 공휴일 제외)</span>
-			
-			<span>브랜드 스토리회사소개채용정보이용약관개인정보처리방침공지사항고객센터고객의 소리전문가 등록사업자 구매회원제휴/광고 문의입점신청 문의</span>
-			
-			<span>상호명(주)버킷플레이스이메일(고객문의) space@bucketplace.net (제휴문의) contact@bucketplace.net</span>
-			<span>대표이사:홍길동 사업자등록번호:119-86-91245 통신판매업신고번호:제2018-서울서초-0580호 주소:서울 서초구 서초대로74길 4 삼성생명서초타워 25, 27층</span>
-			<span>공간은 개별 판매자가 상품을 판매하는 오픈마켓이며 (주)버킷플레이스는 통신판매중개자로 거래 당사자가 아니므로, 판매자가 등록한 상품정보 및 거래 등에 대해 일체 책임을 지지 않습니다.</span>
-			
-			<span>Copyright 2021. bucketplace, Co., Ltd. All rights reserved [ developer : TeamSpace ]</span>
-			
-		</pre>
-		</footer>
-	<!-- Footer Section End -->
+         <!-- Footer Section Begin -->
+      <footer>
+         <pre
+            style="color: rgb(107, 107, 107); font-size: 0.7em; text-align: left;">
+      
+         <span style="font-weight: 700; font-size: 6em;">1670-0876</span><a
+               href=""><i class="fab fa-apple"
+               style="margin-left: 35%; width: 4em; height: 4em;"></i></a><a href=""><i
+               class="fab fa-google-play"
+               style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
+               class="fab fa-facebook"
+               style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
+               class="fab fa-instagram"
+               style="margin-left: 2%; width: 4em; height: 4em;"></i></a>
+         <span style="font-size: 2em;">평일 09:00 ~ 18:00 (주말 & 공휴일 제외)</span>
+         
+         <span>브랜드 스토리회사소개채용정보이용약관개인정보처리방침공지사항고객센터고객의 소리전문가 등록사업자 구매회원제휴/광고 문의입점신청 문의</span>
+         
+         <span>상호명(주)버킷플레이스이메일(고객문의) space@bucketplace.net (제휴문의) contact@bucketplace.net</span>
+         <span>대표이사:홍길동 사업자등록번호:119-86-91245 통신판매업신고번호:제2018-서울서초-0580호 주소:서울 서초구 서초대로74길 4 삼성생명서초타워 25, 27층</span>
+         <span>공간은 개별 판매자가 상품을 판매하는 오픈마켓이며 (주)버킷플레이스는 통신판매중개자로 거래 당사자가 아니므로, 판매자가 등록한 상품정보 및 거래 등에 대해 일체 책임을 지지 않습니다.</span>
+         
+         <span>Copyright 2021. bucketplace, Co., Ltd. All rights reserved [ developer : TeamSpace ]</span>
+         
+      </pre>
+      </footer>
+   <!-- Footer Section End -->
 </body>
 </html>

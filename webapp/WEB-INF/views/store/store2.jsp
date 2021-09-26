@@ -361,16 +361,6 @@ footer {
                     </tr>
                 </tbody>
             </table>-->
-
-
-
-
-
-
-
-
-
-
 								<p class="displaynone">
 									<img
 										src="//img.echosting.cafe24.com/skin/base_ko_KR/product/txt_naver.gif"
@@ -458,7 +448,6 @@ footer {
 								
 								function QuantityDown(product_Number,product_Price) {
 									if(count<2){
-										alert("좀 시켜라");
 										location.href = "";
 									}
 									$.ajax({
@@ -520,7 +509,12 @@ footer {
 											"count":count											
 										},
 										success:function(data){  
-											alert("장바구니에 저장되었습니다.");
+											if(confirm('장바구니로 이동하시겠습니까?')) {
+												location.href="cart?s_id="+s_id;
+										     } else {
+										        return false;
+										       }
+											/* alert("장바구니에 저장되었습니다."); */
 										},
 										error:function(){  
 											alert("error");
@@ -551,7 +545,8 @@ footer {
 												<td>${productVo.product_Name }</td>
 												<td><span class="quantity"> <input
 														id="quantity1" name="quantity_opt[]" style="" value="1"
-														type="text" /> <a href="#none"> <img
+														type="text" />
+														 <a href="#none"> <img
 															src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif"
 															alt="수량증가" class="QuantityUp up"
 															onclick="QuantityUp(${productVo.product_Number},${productVo.product_Price})" /></a>

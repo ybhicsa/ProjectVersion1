@@ -198,20 +198,13 @@
 		    	<label class="productInsertLabel">상품설명첨부(이미지)</label><br>
 		    	<input type="file" id="product_Serve" name="Serve"><p/>
 		    	<label class="productInsertLabel">상품설명첨부(글)</label><br>
-		    	<input type="text" id="product_Desc" name="product_Desc"><p/>
+		    	<input class="css_productInsert_input" type="text" id="product_Desc" name="product_Desc" placeholder="부가설명란,"><p/>
 		    	<label class="productInsertLabel">판매가</label><br>
 		    	<input class="css_productInsert_input" type="text" id="product_Price" name="product_Price"><p/>
 		    	<label class="productInsertLabel">옵션사용여부</label><br>
 		    	<input type="radio" id="Option_ok" name="product_Option" value="1"><label class="productInsertLabel_radio" for="use">사용</label>
-		    	<input type="radio" id="Option_no" name="product_Option" value="0"><label class="productInsertLabel_radio" for="notUsed">미사용</label><p/>
-		    	<!-- 사용여부에 따른 기능부여 -->
-		    	<label class="productInsertLabel">사이즈</label><br>
-		    	<input class="css_productInsert_input" type="text" id="productSize" name="productSize"><p/>
-		    	<label class="productInsertLabel">추가금액</label><br>
-		    	<input class="css_productInsert_input" type="text" id="productAddPrice" name="productAddPrice"><p/>
-		    	<!-- 사용여부에 따른 기능부여 -->
+		    	<input type="radio" id="Option_no" name="product_Option" value="0" checked><label class="productInsertLabel_radio" for="notUsed">미사용</label><p/>
 		    	<label class="productInsertLabel">배송비</label> <span class="productInsertLabel_radio">기본 3,000원</span><p/>
-		    	<!-- <input type="" id="" name=""><p/> -->
 		    	<input class="css_productInsert_btn" type="submit" value="등록하기" onclick="">&nbsp;
 		    	<input class="css_productInsert_btn" type="reset" value="초기화">
 	    	</form>

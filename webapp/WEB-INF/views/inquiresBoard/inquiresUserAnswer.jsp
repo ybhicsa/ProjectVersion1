@@ -259,23 +259,25 @@ footer {
    <!-- Header End -->
    <div class="main_wrap">
    <section>
-      <form action="interiorInquiries" method="post">
-         <h2>시공문의하기</h2>
-         <span class="inquiriesExample">시공관련 문의사항만 접수가능합니다.</span>
+      <form action="inquiresUserAnswerOk" method="post">
+         <h2>고객문의</h2>
+         <span class="inquiriesExample">고객문의 답변</span>
          <p />
          <input class="css_inquiries_input" type="text" id="inquiriesTitle"
-            name="cd_Title" placeholder="제목을 입력해주세요." required>
+            name="ud_Title" value="[답변완료] ${inquiryVo.ud_Title } " readonly>
          <p />
          <textarea class="css_inquiries_input" id="inquiriesContent"
-            name="cd_Content" rows="5%" cols="10%" placeholder="문의내용을 입력해주세요.dd"
-            required></textarea>
+            name="ud_Content" rows="5%" cols="10%"
+            required>
+${inquiryVo.ud_Content }
+#######답변#######
+            </textarea>
          <p />
-         <input class="css_inquiries_input" type="text" id="interiorCompany"
-            name="cd_Company" value="${cc_Cname }" placeholder="시공업체명을 입력해주세요.">
-         <p />
-         <input type="hidden" name="user_Nickname"
-            value="${session_nickName }"> <input class="css_input_btn"
-            type="submit" value="문의하기" onclick="">
+       
+         
+         <input type="hidden" name="user_Nickname" value="${session_nickName }"> 
+         <input type="hidden" name="ud_Id" value="${inquiryVo.ud_Id }"> 
+         <input class="css_input_btn" type="submit" value="답변하기" onclick="">
          <p />
       </form>
    </section>

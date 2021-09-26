@@ -18,15 +18,15 @@
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-<link rel="stylesheet" href="css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="../css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="../css/style.css" type="text/css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
@@ -348,9 +348,139 @@ footer {
 	height: auto;
 	background: rgb(226, 226, 226);
 }
+
+.div1 label{
+	position: relative;
+	width: 10%;
+	text-align: left;
+	color: #111;
+	
+}
+.div2 {
+	margin-left: 20%;
+	margin-right: 20%;
+	padding-top:2%;
+	
+	margin-bottom: 3%;
+}
+
+.labelStar {
+	color: red;
+}
+
 </style>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			
+			 /* $("#questionForm").click(function(){
+				 alert("test");
+			 } */
+			var idAdd = document.getElementById("add_text");
+			var idAdd2 = document.getElementById("add_text2");
+			var idAdd3 = document.getElementById("add_text3");
+			var idAdd4 = document.getElementById("add_text4");
+			var idAdd5 = document.getElementById("add_text5");
+			var idAdd6 = document.getElementById("add_text6");
+			var idAdd7 = document.getElementById("add_text7");
+			var idAdd8 = document.getElementById("add_text8");
+			var idAdd9 = document.getElementById("add_text9");
+			
+		    $("#question1").click(function(){
+		       // alert("Hello ");
+		       if (idAdd) {
+			   idAdd.innerHTML = "<br>우측 상단 마이페이지를 클릭 후 [구매내역]을 통해 확인 가능합니다.";
+					return false;
+				} 
+		    }) 
+		    /* $("#question1").click(function(){
+		      
+		       if (idAdd == null) {
+			   idAdd.innerHTML = "";
+					return true;
+				} 
+		    })  */
+		    
+		    
+		    $("#question2").click(function(){
+		    	if (idAdd2) {
+			   idAdd2.innerHTML = "<br>카카오페이를 이용해 편리한 결제가 가능합니다.";
+					return false;
+				}  
+		    }) 
+		    $("#question3").click(function(){
+		       if (idAdd3) {
+			   idAdd3.innerHTML = "<br>전화주문은 준비중에 있습니다";
+					return false;
+				}  
+		    }) 
+		    $("#question4").click(function(){
+		       if (idAdd4) {
+			   idAdd4.innerHTML = "<br>각카드사 별로 상이하며,카드사를 통해 확인 가능합니다.";
+					return false;
+				}  
+		    })
+		    
+		    
+		    $("#question5").click(function(){
+		       if (idAdd5) {
+			   idAdd5.innerHTML = "<br>freespace@naver.com으로 문의 부탁드립니다.";
+					return false;
+				}  
+		    })
+		    $("#question6").click(function(){
+		       if (idAdd6) {
+			   idAdd6.innerHTML = "<br>각카드사 별로 상이하며,카드사를 통해 확인 가능합니다.";
+					return false;
+				}  
+		    })
+		    $("#question7").click(function(){
+		       if (idAdd7) {
+			   idAdd7.innerHTML = "<br>우측 상단 프로필 사진을 클릭 후 [마이홈 > 좋아요] 페이지에서 확인 가능합니다.";
+					return false;
+				}  
+		    })
+		    $("#question8").click(function(){
+		       if (idAdd8) {
+			   idAdd8.innerHTML = "<br>[공간]이 직접 상담과 시공을 진행하지 않습니다.";
+					return false;
+				}  
+		    })
+		    $("#question9").click(function(){
+		       if (idAdd9) {
+			   idAdd9.innerHTML = "<br>오늘의집 전문가 찾기 서비스는 오늘의집 사용자와 인테리어 전문가님을 중개하는 서비스로, 따로 진행되지 않습니다.";
+					return false;
+				}  
+		    })
+		    
+		 });
+   
+</script>
 </head>
 <body>
+	<!-- Offcanvas Menu Wrapper Begin -->
+	<div class="offcanvas-menu-overlay"></div>
+	<div class="offcanvas-menu-wrapper">
+		<div class="canvas-close">
+			<span class="icon_close"></span>
+		</div>
+		<div class="logo">
+			<a href="index"><span class="mainLogo">공간</span></a>
+		</div>
+		<div id="mobile-menu-wrap"></div>
+		<div class="om-widget">
+			<!-- 창이 작아졌을때 메뉴버튼 내부버튼 -->
+		</div>
+		<div class="om-social">
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+				class="fa fa-twitter"></i></a> <a href="#"><i
+				class="fa fa-youtube-play"></i></a> <a href="#"><i
+				class="fa fa-instagram"></i></a> <a href="#"><i
+				class="fa fa-pinterest-p"></i></a>
+		</div>
+	</div>
+	<!-- Offcanvas Menu Wrapper End -->
+	
 	<!-- Header Section Begin -->
 	<header class="header-section">
 		<div class="hs-top">
@@ -380,7 +510,7 @@ footer {
 								<span>&nbsp;|&nbsp;</span>
 								<!-- 로그인 -->
 								<!-- 로그인시 로그아웃 -->
-								<a href="myPage" class="layout-navigation-bar-login__item">마이페이지</a>
+								<a href="myPage?nickname=${session_nickName }" class="layout-navigation-bar-login__item">마이페이지</a>
 								<!-- 회원가입 -->
 								<!-- 로그인시 마이페이지 -->
 								<!-- if문 session값을 확인하여 메뉴를 달리해준다. -->
@@ -463,180 +593,91 @@ footer {
 		<!-- 마이페이지 네비게이션 끝 -->
 	</header>
 	<div class="main_wrap">
-	<section id="RegistrationSection">
-		<form action="companyRegistration" method="post"
-			id="companyRegistration" enctype="multipart/form-data">
+	<section >
+		<form action="question" method="post" id="ServiceForm">
+			
 			<div>
-				<h2>판매자입점신청</h2>
+				<br><br><br><br>
+				
 			</div>
-			<div style="border-bottom: 1px solid #dbdbdb;">
-				<ul id="registrationUl">
-					<li>작성해주신 정보를 바탕으로 카테고리별 담당 MD가 입점을 검토하여 이메일을 드립니다.</li>
-					<br>
-					<li>입점 불가에 대한 통보는 불가 사유와 함께 이메일로 보내드립니다. 회신을 주셔도 답변이 불가한 점 양해
-						부탁드립니다.</li>
-					<br>
-					<li>사업자가 이미 등록되어 있어 입점 신청이 불가한 경우 space@gmail.com으로 이메일을
-						보내주세요.</li>
-					<br>
-					<li>입점 신청과 관련된 내용은 일반 고객센터 접수가 불가능합니다. 참고 바랍니다.</li>
-					<br>
-				</ul>
+			<h2>고객센터</h2>
+			운영시간:평일 09:00 ~ 18:00(주말 & 공휴일 제외)<br>
+			이메일 : freespace@naver.com<br>
+			전화 : 1670-0876<br><br>
+			<button type="submit"  value="결제하기" class="css_input_btn">문의하기</button>
+
+			<br>
+			
+			<br><div align="center">
+			
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question1">주문 내역은 어떻게 확인할 수 있나요?</span></label>
+			<b><span id="add_text" class="text_add"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div>
-				<h4 style="font-weight: 600; margin: 2%; color: #757575;">회사 정보
-				</h4>
+			
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question2">결제 방법은 어떤 것이 있나요?</span></label>
+			<b><span id="add_text2" class="text_add2"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div class="div1" style="border-bottom: 1px solid #dbdbdb;">
-				<span> <label class="registraionLable">회사 이름<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Cname" name="cc_Cname" placeholder="">
-				</span>
-				<p />
-				<span> <label class="registraionLable">사업자 등록번호<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email" type="text"
-					id="cc_Nember" name="cc_Nember" placeholder=""><span>&nbsp;-&nbsp;</span>
-					<input class="css_input_userInfo_email" type="text" id="cc_Nember2"
-					name="cc_Nember2"><span>&nbsp;-&nbsp;</span> <input
-					class="css_input_userInfo_email" type="text" id="cc_Nember3"
-					name="cc_Nember3">
-				</span>
-				<p />
-				<span> <label class="registraionLable">홈페이지</label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Home" name="cc_Home" placeholder="">
-				</span>
-				<p />
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question3">비회원주문 및 전화주문이 가능한가요?</span></label>
+			<b><span id="add_text3" class="text_add3"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div>
-				<h4 style="font-weight: 600; margin: 2%; color: #757575;">회사 주소
-				</h4>
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question4">신용카드 무이자 할부가 되나요?</span></label>
+			<b><span id="add_text4" class="text_add4"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div class="div1" style="border-bottom: 1px solid #dbdbdb;">
-				<span> <label class="registraionLable">우편번호<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Address1" name="cc_Address1" placeholder="우편번호" readonly>
-				</span>
-				<p />
-				<span> <label class="registraionLable">주소<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Address2" name="cc_Address2" placeholder="주소" readonly>
-				</span>
-				<p />
-				<span> <label class="registraionLable">상세주소<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Address3" name="cc_Address3" placeholder="상세주소">
-				</span>
-				<p />
-				<span><input class="css_input_btn2" type="button"
-					onclick="openZipSearch()" value="주소찾기"></span>
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question5">회원가입시 이미 가입된 이메일이라고 표시됩니다. 어떻게 해야하나요?</span></label>
+			<b><span id="add_text5" class="text_add5"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div>
-				<h4 style="font-weight: 600; margin: 2%; color: #757575;">영업담당자
-					정보</h4>
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question6">배송은 얼마나 걸리나요?</span></label>
+			<b><span id="add_text6" class="text_add6"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div class="div1" style="border-bottom: 1px solid #dbdbdb;">
-				<span> <label class="registraionLable">이름<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Pname" name="cc_Pname" placeholder="">
-				</span>
-				<p />
-				<span> <label class="registraionLable">전화번호<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <select class="css_input_userInfo2" name="cc_Tel"
-					id="cc_Tel">
-						<option value="010" selected>010</option>
-						<option value="011">011</option>
-						<option value="02">02</option>
-						<option value="032">032</option>
-						<option value="_manual">직접입력</option>
-				</select><span>&nbsp;-&nbsp;</span> <input class="css_input_userInfo_email"
-					type="text" id="cc_Tel1" name="cc_Tel1"><span>&nbsp;-&nbsp;</span>
-					<input class="css_input_userInfo_email" type="text" id="cc_Tel2"
-					name="cc_Tel2">
-				</span>
-				<p />
-				<span> <label id="email" class="registraionLable">이메일<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input class="css_input_userInfo_email3" type="text"
-					id="cc_Mail" name="cc_Mail" placeholder="이메일"> <span>@</span>
-					<select class="css_input_userInfo3" name="emailsb" id="emailsb">
-						<option value="naver.com" disabled="" selected>선택해주세요</option>
-						<option value="naver.com">naver.com</option>
-						<option value="hanmail.net">hanmail.net</option>
-						<option value="daum.net">daum.net</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="nate.com">nate.com</option>
-						<option value="hotmail.com">hotmail.com</option>
-						<option value="outlook.com">outlook.com</option>
-						<option value="icloud.com">icloud.com</option>
-						<option value="_manual">직접입력</option>
-				</select>
-				</span>
-				<p />
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question7">"좋아요"를 누른 콘텐츠(사진/집들이/노하우/등)들은 어디서 볼 수 있나요?</span></label>
+			<b><span id="add_text7" class="text_add7"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div>
-				<h4 style="font-weight: 600; margin: 2%; color: #757575;">상세 정보</h4>
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question8">인테리어 상담과 시공을 직접해주시나요?</span></label>
+			<b><span id="add_text8" class="text_add8"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div class="div1" style="border-bottom: 1px solid #dbdbdb;">
-				<span> <label class="registraionLable2">취급카테고리<span
-						class="labelStar">&nbsp;*</span></label>
-				</span> <span> <input type="checkbox" id="apt"
-					name="interiorCategory" value="아파트"><label for="apt">아파트</label>
-					<input type="checkbox" id="house" name="interiorCategory"
-					value="단독주택"><label for="house">단독주택</label> <input
-					type="checkbox" id="villa" name="interiorCategory" value="빌라"><label
-					for="villa">빌라</label> <input type="checkbox" id="singleRoom"
-					name="interiorCategory" value="원룸"><label for="singleRoom">원룸</label>
-				</span>
-				<p />
-				<span> <label class="registraionLable">업체소개</label>
-				</span> <span> <input class="css_input_userInfo_email2" type="text"
-					id="cc_Introduction" name="cc_Introduction" placeholder="">
-				</span>
-				<div>
-					<span> <label class="registraionLable" id="">업체관련사진<span
-							class="labelStar">&nbsp;*</span></label>
-					</span> <span> <input type="file" id="input_file" name="Main">
-					</span>
-					<p />
-				</div>
+			<br><div align="center">
+			<label><span class="labelStar">&nbsp;*</span></label>
+			<label><span id="question9">신용카드 무이자 할부가 되나요?</span></label>
+			<b><span id="add_text9" class="text_add9"></span></b><br>
+			<div class="div2" style="border-bottom: 1px solid #dbdbdb;">
 			</div>
-			<div>
-				<h4 style="font-weight: 600; margin: 2%; color: #757575;">개인정보수집
-					및 이용동의</h4>
-			</div>
-			<div class="div1" style="border-bottom: 1px solid #dbdbdb;">
-				<span class="joinExample"> ㈜버킷플레이스는 개인정보보호법, 정보통신망 이용촉진 및
-					정보보호 등에 관한 법률 등 관련 법령상의 개인정보보호 규정을 준수하며, 판매자님이 입점신청 시 필요한 최소한의 개인
-					정보를 수집합니다. </span>
-				<table>
-					<tr>
-						<th>목적</th>
-						<th>항목</th>
-						<th>보유기간</th>
-					</tr>
-					<tr>
-						<td>판매자 식별, 입점 검토, 공지사항의 전달</td>
-						<td>영업담당자의 이름/전화번호/이메일</td>
-						<td>입점 처리기간이 종료되는 시점</td>
-					</tr>
-				</table>
-				<div class="div2">
-					<input type="checkbox" id="SMSCheck" name=""><label
-						id="SMSLabel" for="SMSCheck">입점신청을 위한 개인정보 수집 및 이용에 동의<span
-						style="color: #00C892; font-weight: 700;">(필수)</span></label>
-				</div>
-				<input type="hidden" name="user_Id" value="${s_ID }"> <input
-					class="css_input_btn" type="submit" id="" name="" onclick=""
-					value="입점신청 완료">
-			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- <div class="div2" style="border-bottom: 1px solid #dbdbdb;"></div> -->
+			
+			
 		</form>
 	</section>
 	<!-- top -->

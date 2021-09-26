@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<html>
+<html>
 <head>
 <meta charset="UTF-8">
-<title>공간, 회원정보수정</title>
+<title>공간, 시공업체등록 | 아파트 | 단독주택 | 빌라 | 원룸</title>
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
 	rel="stylesheet">
@@ -26,14 +28,23 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+	function openZipSearch() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				$("#cc_Address1").val(data.zonecode);
+				$("#cc_Address2").val(data.address);
+			}
+		}).open();
+	}
+</script>
 
 <style type="text/css">
-.row2 {
-	text-align: center;
-	width: 100%;
-	margin-left: 12%;
-}
-
 body {
 	background-color: #FAFAFA;
 }
@@ -49,85 +60,23 @@ header {
 	background-color: rgb(251, 251, 251);
 	border-bottom: 1px solid #dbdbdb;
 }
-.css_input_userInfo {
-	text-align: left;
-	width: 26%;
-	padding: 1% 1% 1%;
-	border: 1px solid #dbdbdb;
-	background-color: #fff;
-	border-radius: 4px;
-	box-sizing: border-box;
-	font-size: 15px;
-	transition: border-color .1s, background-color .1s;
-	resize: none;
-	-webkit-appearance: none;
-}
 
-.css_input_userInfo_email {
-	width: 12%;
-	padding: 1% 1% 1%;
-	border: 1px solid #dbdbdb;
-	background-color: #fff;
-	border-radius: 4px;
-	box-sizing: border-box;
-	font-size: 15px;
-	transition: border-color .1s, background-color .1s;
-	resize: none;
-}
-
-.css_input_btn {
-	width: 26%;
-	margin-bottom: 3%;
-	padding: 8px 8px 8px 8px;
-	border: 1px solid #dbdbdb;
-	background-color: #00C892;
-	border-radius: 4px;
-	box-sizing: border-box;
-	align-items: center;
-	font-weight: 700;
-	font-size: 15px;
-	line-height: 21px;
-	transition: border-color .1s, background-color .1s;
-	resize: none;
-	-webkit-appearance: none;
-}
-
-#clause {
-	display: table;
-	margin-left: 37%;
-	margin-right: 0px auto;
-	border: 1px solid grey;
-	width: 26%;
-	background-color: rgb(255, 255, 255);
-}
-
-.modifyUserInfo {
+section {
+	width: 80%;
+	text-align: center;
 	margin-top: 1%;
-	display: block;
-	font-size: 15px;
-	font-weight: bold;
-	color: rgb(41, 41, 41);
-	word-break: keep-all;
+	margin-left: 10%;
 }
 
-.modifyExample {
-	color: grey;
-	margin-top: 13%;
+hr {
+	width: 80%;
+}
+
+footer {
+	text-align: center;
+	color: black;
+	margin-top: 15%;
 	font-size: 12px;
-}
-
-#userInfoModifyForm {
-	text-align: center;
-}
-
-h2 {
-	text-align: center;
-	margin-top: 1%;
-	display: block;
-	font-size: 25px;
-	font-weight: bold;
-	color: rgb(41, 41, 41);
-	word-break: keep-all;
 }
 
 .mainLogo {
@@ -136,9 +85,15 @@ h2 {
 	font-size: 55px;
 }
 
-#myPageDiv {
-	border-top: 1px solid #ebebeb;
+h2 {
 	text-align: center;
+	margin-top: 1%;
+	margin-bottom: 3%;
+	display: block;
+	font-size: 25px;
+	font-weight: bold;
+	color: rgb(41, 41, 41);
+	word-break: keep-all;
 }
 
 .layout-navigation-bar-login__item {
@@ -152,19 +107,6 @@ h2 {
 	line-height: 20px;
 	text-decoration: none;
 	color: #757575;
-}
-
-.css_input_userInfo2 {
-	text-align: left;
-	width: 80%;
-	border: 1px solid #dbdbdb;
-	background-color: #fff;
-	border-radius: 20px 20px 20px 20px;
-	box-sizing: border-box;
-	font-size: 15px;
-	transition: border-color .1s, background-color .1s;
-	resize: none;
-	-webkit-appearance: none;
 }
 
 #searchButton {
@@ -184,13 +126,6 @@ h2 {
 	-webkit-appearance: none;
 }
 
-.mainLogo {
-	font-family: 'Gugi', cursive;
-	color: #111;
-	font-size: 55px;
-	text-decoration: none;
-}
-
 a:link {
 	color: black;
 	text-decoration: none;
@@ -207,23 +142,268 @@ a:hover {
 	text-decoration: none;
 }
 
-#addFile {
-	display: none;
+#cartForm span {
+	box-sizing: content-box;
+	margin-right: 3%;
 }
-#image_container {
+
+#cartSection {
 	text-align: center;
-	margin-left: 44%;
-    width: 12%;
-    height: auto;
+	width: 100%;
+	height: auto;
+	border: 1px dashed #dbdbdb;
+	border-radius: 20px 20px 20px 20px;
 }
+
+.css_input_btn {
+	width: 26%;
+	margin-bottom: 1%;
+	padding: 8px 8px 8px 8px;
+	border: 1px solid #dbdbdb;
+	background-color: #00C892;
+	border-radius: 4px;
+	box-sizing: border-box;
+	align-items: center;
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 40px;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+	-webkit-appearance: none;
+}
+
+.css_input_btn2 {
+	width: 26%;
+	padding: 8px 8px 8px 8px;
+	border: 1px solid #dbdbdb;
+	background-color: #00C892;
+	border-radius: 4px;
+	box-sizing: border-box;
+	align-items: center;
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 40px;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+	-webkit-appearance: none;
+}
+
+#cartSectionText {
+	color: #757575;
+	font-weight: 700;
+}
+
+#registrationUl {
+	text-align: left;
+	margin-left: 28%;
+	font-size: 14px;
+}
+
+.registraionLable {
+	text-align: left;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.registraionLable2 {
+	text-align: left;
+	margin-left: 8.5%;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.css_input_userInfo_email {
+	width: 11.5%;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 15px;
+	line-height: 2.3em;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+}
+
+.css_input_userInfo_email2 {
+	width: 37%;
+	margin-bottom: 1%;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 15px;
+	line-height: 2.3em;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+}
+
+.css_input_userInfo_email3 {
+	width: 18%;
+	margin-bottom: 1%;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 15px;
+	line-height: 2.3em;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+}
+
+.css_input_userInfo {
+	width: 26%;
+	padding: 1%; 1%; 1%;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 15px;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+}
+
+.css_input_userInfo2 {
+	width: 11.5%;
+	height: 2.5em;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 15px;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+}
+
+.css_input_userInfo3 {
+	width: 17.2%;
+	height: 2.5em;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 15px;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+}
+
+.div1 label {
+	position: relative;
+	width: 10%;
+	text-align: left;
+	color: #111;
+}
+
+.div2 {
+	margin-left: 26%;
+	margin-bottom: 3%;
+}
+
+#input_file {
+	margin-left: 7.5%;
+}
+
+.joinExample {
+	color: grey;
+	font-size: 12px;
+	margin-bottom: 1%;
+}
+
+table {
+	margin-bottom: 1%;
+}
+
+th {
+	background-color: #dbdbdb;
+}
+
+table, th, td {
+	border: 1px solid black;
+	text-align: center;
+	margin-left: 19%;
+	margin-top: 3%;
+	line-height: 2em;
+}
+
+#SMSCheck {
+	text-align: center;
+	margin-right: 11px;
+}
+
+#SMSLabel {
+	text-align: left;
+	width: 70%;
+}
+
+.labelStar {
+	color: red;
+}
+
+#myPageDiv {
+	border-top: 1px solid #ebebeb;
+	text-align: center;
+}
+
 footer {
 	width: auto;
 	height: auto;
 	background: rgb(226, 226, 226);
 }
+
+.div1 label{
+	position: relative;
+	width: 10%;
+	text-align: left;
+	color: #111;
+	
+}
+.div2 {
+	margin-left: 20%;
+	margin-right: 20%;
+	padding-top:2%;
+	
+	margin-bottom: 3%;
+}
+
+.labelStar {
+	color: red;
+}
+
+.text_placehorder_test {
+	
+	width: 800px;
+	color: #757575;
+	font-size: 38px;
+}
+.text_placehorder_test3{
+	width: 800px;
+	color: #757575;
+	font-size: 20px;
+	margin-top: 2%;
+}
+.css_productInsert_btn_test {
+	width: 20%;
+	
+	padding: 8px 8px 8px 8px;
+	border: 1px solid #dbdbdb;
+	background-color: #00C892;
+	border-radius: 4px;
+	box-sizing: border-box;
+	align-items: center;
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 2em;
+	transition: border-color .1s, background-color .1s;
+	resize: none;
+	-webkit-appearance: none;
+	
+}
+
+
 </style>
+
 </head>
 <body>
+	<!-- Header Section Begin -->
 	<!-- Header Section Begin -->
 	<header class="header-section">
 		<div class="hs-top">
@@ -253,8 +433,7 @@ footer {
 								<span>&nbsp;|&nbsp;</span>
 								<!-- 로그인 -->
 								<!-- 로그인시 로그아웃 -->
-								<a href="myPage?nickname=${session_nickName }"
-									class="layout-navigation-bar-login__item">마이페이지</a>
+								<a href="myPage" class="layout-navigation-bar-login__item">마이페이지</a>
 								<!-- 회원가입 -->
 								<!-- 로그인시 마이페이지 -->
 								<!-- if문 session값을 확인하여 메뉴를 달리해준다. -->
@@ -267,7 +446,6 @@ footer {
 				</div>
 			</div>
 		</div>
-
 		<div class="hs-nav">
 			<div class="container">
 				<div class="row">
@@ -278,11 +456,11 @@ footer {
 								<!-- 홈 -->
 								<li><a href="store1">스토어</a></li>
 								<!-- 스토어 -->
-								<li><a href="companyMain">시공업체</a></li>
+								<li><a href="company">시공업체</a></li>
 								<!-- 시공업체 -->
 								<!-- <li><a href="interiorInquiries">시공문의</a></li> -->
 								<!-- 시공업체상세페이지 -->
-								<li><a href="communityMain">커뮤니티</a></li>
+								<li><a href="community">커뮤니티</a></li>
 								<!-- 커뮤니티 -->
 								<li><a href="event">이벤트</a></li>
 								<!-- 이벤트 -->
@@ -337,97 +515,60 @@ footer {
 		</div>
 		<!-- 마이페이지 네비게이션 끝 -->
 	</header>
-	<!-- Header End -->
-		<div class="main_wrap">
-	<!-- section begin -->
-	<h2>회원정보수정</h2>
-	<section>
-		<form action="userModify" method="post" id="userInfoModifyForm" name="" enctype="multipart/form-data">
-			<label class="modifyUserInfo">이메일</label><br> <input
-				class="css_input_userInfo_email" type="text" id="email1"
-				name="email1" placeholder="이메일"> <span>@</span> <select
-				class="css_input_userInfo_email">
-				<option value="#" checked>선택해주세요</option>
-				<option value="naver.com">naver.com</option>
-				<option value="hanmail.net">hanmail.net</option>
-				<option value="daum.net">daum.net</option>
-				<option value="gmail.com">gmail.com</option>
-				<option value="nate.com">nate.com</option>
-				<option value="hotmail.com">hotmail.com</option>
-				<option value="outlook.com">outlook.com</option>
-				<option value="icloud.com">icloud.com</option>
-				<option value="_manual">직접입력</option>
-			</select>
-			<p />
-			<label class="modifyUserInfo">닉네임</label> <span class="modifyExample">다른
-				유저와 겹치지 않는 별명을 입력해주세요.(2~15자)</span>
-			<p />
-			<input class="css_input_userInfo" type="text" id="nickname"
-				name="nickname" placeholder="별명 (2~15자)">
-			<p />
+	<div class="main_wrap">
+	<section >
+		<form action="questionOk" method="post" id="questionForm">
 			
-			<label class="modifyUserInfo">현재비밀번호</label>
-			<input class="css_input_userInfo" type="password" id="old_User_Pw" name="old_User_Pw" placeholder="현재 비밀번호"><p/>
-			
-			<label class="modifyUserInfo">새로운 비밀번호</label>
-			<span class="modifyExample">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</span><p/>
-			<input class="css_input_userInfo" type="password" id="new_User_Pw" name="new_User_Pw" placeholder="새로운 비밀번호"><p/>
-			
-			<label class="modifyUserInfo">새로운 비밀번호확인</label>
-			<input class="css_input_userInfo" type="password" id="new_User_Pw2" name="new_User_Pw2"><p/>
-			<label class="modifyUserInfo">대표이미지변경</label> <span
-				class="modifyExample">대표이미지 설정을 해주세요.</span>
-			<p />
-			<label for="addFile"> <img src="../img/mypage/mypageImg.png"
-				style="cursor: pointer;" />
-			</label> <a><input id="addFile" type="file" onchange="previewImg(event);" name="Main"></a>
-			<p />
-			<div id="image_container"></div>
-			<input class="css_input_btn" type="submit" value="회원정보수정" onclick="">
-			<input type="hidden" name="user_id" value="${s_ID }">
-			<input type="hidden" name="user_nickname" value="${session_nickName }">
-		</form>
-		<!-- section begin -->
-		<!-- 이미지미리보기 -->
-		<script>
-			 function previewImg(event) {
-				var reader = new FileReader();
+			<div>
+				<br><br><br><br>
 				
-				reader.onload = function(event) {	
-					var img = document.createElement("img");
-					
-					img.setAttribute("src", event.target.result);
-					img.setAttribute("style", "border-radius: 100%");
-					
-					document.querySelector("div#image_container").appendChild(img); 
-					};
-					
-					reader.readAsDataURL(event.target.files[0]);
-					
-					} 
-		</script>
-		<!-- 이미지미리보기 -->
+			</div>
+				
+		<!-- 전체 묶음 div -->
+			
+			<div align="center">
+			<div class="text_placehorder_test" >
+			문의하신 내용이 정상적으로 접수되었습니다.<br>
+			
+			</div> 
+			<div class="text_placehorder_test3" >
+			&nbsp;&nbsp;&nbsp;문의에 대한 답변은 내 문의내역에서 확인 가능합니다.
+			</div> 
+			<div align="center"><br><br>
+				<!-- <img src="img/logo.png" > -->
+				<!-- <img src="img/qustionOk1.jpg" > -->
+			</div><br><br><br><br>
+			<div align="center">
+			<a href="serviceCenter"><button type="button" class="css_productInsert_btn_test" style="margin-left: 3%;" >고객센터 홈</button></a>
+			</div>
+			</div>
+			
+			
+		
+		
+			
+		</form>
 	</section>
-			<!-- top -->
-		<a
-			style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer;"
-			href="#" title="top"> <i class="fas fa-arrow-circle-up"
-			style="width: 2em; height: 2em;"></i></a>
-		<!-- top -->
-			<!-- Footer Section Begin -->
-		<footer>
-			<pre
-				style="color: rgb(107, 107, 107); font-size: 0.7em; text-align: left;">
+	<!-- top -->
+	<a
+		style="display: scroll; position: fixed; bottom: 10px; right: 20px; cursor: pointer;"
+		href="#" title="top"> <i class="fas fa-arrow-circle-up"
+		style="width: 2em; height: 2em;"></i></a>
+	<!-- top -->
+	<!-- Footer Section Begin -->
+	<footer>
+		<pre
+			style="color: rgb(107, 107, 107); font-size: 0.7em; text-align: left;">
 		
 			<span style="font-weight: 700; font-size: 6em;">1670-0876</span><a
-					href=""><i class="fab fa-apple"
-					style="margin-left: 35%; width: 4em; height: 4em;"></i></a><a href=""><i
-					class="fab fa-google-play"
-					style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
-					class="fab fa-facebook"
-					style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
-					class="fab fa-instagram"
-					style="margin-left: 2%; width: 4em; height: 4em;"></i></a>
+				href=""><i class="fab fa-apple"
+				style="margin-left: 35%; width: 4em; height: 4em;"></i></a><a href=""><i
+				class="fab fa-google-play"
+				style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
+				class="fab fa-facebook"
+				style="margin-left: 2%; width: 4em; height: 4em;"></i></a><a href=""><i
+				class="fab fa-instagram"
+				style="margin-left: 2%; width: 4em; height: 4em;"></i></a>
 			<span style="font-size: 2em;">평일 09:00 ~ 18:00 (주말 & 공휴일 제외)</span>
 			
 			<span>브랜드 스토리회사소개채용정보이용약관개인정보처리방침공지사항고객센터고객의 소리전문가 등록사업자 구매회원제휴/광고 문의입점신청 문의</span>
@@ -439,8 +580,8 @@ footer {
 			<span>Copyright 2021. bucketplace, Co., Ltd. All rights reserved [ developer : TeamSpace ]</span>
 			
 		</pre>
-		</footer>
+	</footer>
 	<!-- Footer Section End -->
-	</div>	
+	</div>
 </body>
 </html>
