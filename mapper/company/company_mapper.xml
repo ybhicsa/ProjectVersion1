@@ -51,7 +51,9 @@
 	<!-- 시공의뢰 등록 저장 -->
 	<insert id="insertInquirySave">
 		INSERT INTO Construction_Inquiry
-		(CD_title,
+		(
+		cd_id,
+		CD_title,
 		CD_content,
 		CD_company,
 		user_nickname,
@@ -60,11 +62,13 @@
 		CD_bdate,
 		CD_bhit)
 		VALUES
-		(#{cd_Title},
+		(
+		Construction_Inquiry_SEQ.nextval,
+		#{cd_Title},
 		#{cd_Content},
 		#{cd_Company},
 		#{user_Nickname},
-		0,
+		Construction_Inquiry_SEQ.currval,
 		0,
 		sysdate,
 		0)
