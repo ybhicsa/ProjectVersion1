@@ -49,26 +49,26 @@ public class adminController {
 	public String productInsert(ProductVo productVo, @RequestParam MultipartFile Main, @RequestParam MultipartFile Serve ) throws Exception {
 		System.out.println("시작");
 		//파일이 첨부가 되어 있으면
-				if(Main.getSize()!=0) {
+			if(Main.getSize()!=0) {
 
-					String main1 = String.format("%s", Main);
-					String serve1 = String.format("%s", Serve);
-					
-					//파일저장위치
-					String fileUrl = "C:/workspace/pro_Version04/src/main/resources/static/productImg/";
-					System.out.println("fileUrl : " + fileUrl);
-					//복사할 파일
-					File f = new File(fileUrl+Main);
-					File f2 = new File(fileUrl+Serve);
-					//파일 업로드
-					Main.transferTo(f);
-					Serve.transferTo(f2);
-					
-					//db에 저장하기 위해 vo에 파일이름을 저장시킴.
-					productVo.setProduct_Main(main1);
-					productVo.setProduct_Serve(serve1);
-				}
-				System.out.println(productVo.getProduct_Main());
+				String main1 = String.format("%s", Main);
+				String serve1 = String.format("%s", Serve);
+				
+				//파일저장위치
+				String fileUrl = "C:/workspace/pro_Version09/src/main/resources/static/productImg/";
+				System.out.println("fileUrl : " + fileUrl);
+				//복사할 파일
+				File f = new File(fileUrl+Main);
+				File f2 = new File(fileUrl+Serve);
+				//파일 업로드
+				Main.transferTo(f);
+				Serve.transferTo(f2);
+				
+				//db에 저장하기 위해 vo에 파일이름을 저장시킴.
+				productVo.setProduct_Main(main1);
+				productVo.setProduct_Serve(serve1);
+			}
+				
 		adminService.insertProductOne(productVo);
 		return "/admin/adminPage";
 	}
@@ -143,21 +143,33 @@ public class adminController {
 	}
 	//관리자페이지 배송현황 업데이트
 	@RequestMapping("LocationUpDate")
-	public String LocationUpDate(@RequestParam int user_id, @RequestParam String Location,Model model) {
-		adminService.updateLocationUpDate(user_id,Location);
-		
-		return "/admin/officerDelivery";
-	}
+	public String LocationUpDate(Delivery_StatusVo delivery_StatusVo, @RequestParam String Location,Model model) {
+	      adminService.updateLocationUpDate(delivery_StatusVo,Location);
+	      return "redirect:/officerDelivery";
+	   }
+	
 	
 	
 	//관리자페이지 문의글
 	@RequestMapping("inquiriesDetails")
 	public String inquiriesDetails(@RequestParam(value="page",defaultValue = "1") int page,
 			@RequestParam @Nullable String category,@RequestParam @Nullable String searchWord,Model model) {
+		//시공
 		Map<String , Object> map = adminService.selectInquiryOfficer(page,category,searchWord);
+		
 		
 		model.addAttribute("map", map);
 		return "/admin/inquiriesDetails";
+	}
+	//관리자페이지 문의글
+	@RequestMapping("inquiriesDetails2")
+	public String inquiriesDetails2(@RequestParam(value="page",defaultValue = "1") int page,
+			@RequestParam @Nullable String category,@RequestParam @Nullable String searchWord,Model model) {
+		//시공
+		Map<String , Object> map = adminService.selectuserInquiryOfficer(page,category,searchWord);
+		
+		model.addAttribute("map", map);
+		return "/admin/inquiriesDetails2";
 	}
 	
 	

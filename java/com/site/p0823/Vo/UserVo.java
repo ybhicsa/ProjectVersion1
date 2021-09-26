@@ -24,6 +24,10 @@ public class UserVo {
     // 수신동의 
     private int smsreceiptconsent;
 
+    // 고객 사진 
+    private String user_Main;
+    
+    
 	public UserVo(String user_email, String user_pw, String user_nickname, int smsreceiptconsent) {
 		super();
 		this.user_email = user_email;

@@ -1,9 +1,15 @@
 package com.site.p0823.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.site.p0823.Vo.CompanyVo;
+import com.site.p0823.Vo.ProductVo;
 import com.site.p0823.Vo.UserVo;
 import com.site.p0823.Vo.user_DetailsVo;
+import com.site.p0823.Vo.user_InquiryVo;
 
 @Mapper
 public interface UserMapper {
@@ -22,5 +28,13 @@ public interface UserMapper {
 
 	//배송상세부분 회원상세 저장하기
 	void insertDetailsSet(user_DetailsVo user_DetailsVo, int s_id);
+
+	//고객 문의하기 저장
+	void insertUserQuestionSet(@Param("inquiryVo") user_InquiryVo inquiryVo);
+
+	//검색부분 회사
+	ArrayList<CompanyVo> selectComSearchList(@Param("search") String search);
+	//검색부분 상품
+	ArrayList<ProductVo> selectStoreSearchList(@Param("search") String search);
 
 }

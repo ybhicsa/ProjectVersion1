@@ -76,13 +76,6 @@ public class StoreServiceImpl implements StoreService {
 	public void insertDeliverySetAll(int s_id, user_DetailsVo user_DetailsVo, ProductVo productVo,
 			int count, String other) {
 		
-		System.out.println(s_id);
-		System.out.println(user_DetailsVo.getUser_Address1());
-		
-		System.out.println(other);
-		System.out.println(productVo.getProduct_Price2());
-		System.out.println(count);
-		
 		storeMapper.insertDeliverySetAll(s_id,user_DetailsVo,productVo,count,other);
 	}
 	

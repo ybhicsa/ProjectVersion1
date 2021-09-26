@@ -18,7 +18,7 @@ public class CompanyServiceImpl implements CompanyService {
 	//시공문의 저장
 	@Override
 	public void insertInquirySave(InquiryVo inquiryVo) {
-		System.out.println(inquiryVo.getCd_Title());
+		
 		companyMapper.insertInquirySave(inquiryVo);
 	}
 	

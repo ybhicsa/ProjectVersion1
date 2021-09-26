@@ -1,5 +1,6 @@
 package com.site.p0823.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.site.p0823.Vo.CompanyVo;
+import com.site.p0823.Vo.EventListVo;
 import com.site.p0823.Vo.ProductVo;
 import com.site.p0823.Vo.UserVo;
+import com.site.p0823.Vo.communityVo;
 import com.site.p0823.service.CompanyService;
+import com.site.p0823.service.EventService;
 import com.site.p0823.service.StoreService;
 import com.site.p0823.service.UserService;
+import com.site.p0823.service.communityService;
 
 @Controller
 public class MainController {
@@ -30,15 +35,33 @@ public class MainController {
 	private StoreService storeService;
 	@Autowired
 	CompanyService companyService;
+	@Autowired
+	communityService communityService;
+	@Autowired
+	EventService eventService;
+	
+	
+	DecimalFormat format = new DecimalFormat("###,###");
 	
 	@RequestMapping("index")
-	public String index(Model model) {
-		ArrayList<CompanyVo> clist = companyService.selectCompanyList();
-		ArrayList<ProductVo> plist = storeService.producerAllList();
-		model.addAttribute("companyList", clist);
-		model.addAttribute("productList", plist);
-		return "index";
-	}
+	   public String index(Model model) {
+		  //이벤트 부분
+		  ArrayList<EventListVo> elist = eventService.selecteventList();
+	      //시공업체 부분
+	      ArrayList<CompanyVo> clist = companyService.selectCompanyList();
+	      //스토어부분
+	      ArrayList<ProductVo> plist = storeService.producerAllList();
+	      for(int i=0;i<plist.size();i++) {
+	         plist.get(i).setProduct_Price2(format.format(plist.get(i).getProduct_Price()));
+	      }
+	      //커뮤티티 부분
+	      ArrayList<communityVo> commlist = communityService.selectAllCommunityList();
+	      model.addAttribute("eventList", elist);
+	      model.addAttribute("companyList", clist);
+	      model.addAttribute("productList", plist);
+	      model.addAttribute("communityList", commlist);
+	      return "index";
+	   }
 	
 	@RequestMapping("loginOut")
 	public String loginOut() {
@@ -104,6 +127,19 @@ public class MainController {
 		return "redirect:/index";
 	}
 	
+	//이메일인증컨트롤러
+   @PostMapping("emailCheck")
+   @ResponseBody
+   public String emailCheck(HttpServletRequest request,@RequestParam String user_email, @RequestParam String email2) {
+      HttpSession session = request.getSession();
+      //이름,이메일주소를 넘겨서 비밀번호 생성후 이메일 발송처리 
+      String pwCode = userService.emailCheck(user_email,email2);
+      session.setAttribute("pwCode", pwCode);
+      return pwCode;
+   }
+	
+	
+	
 	//컴퍼니 올 리스트
 	@PostMapping("companyAll")
 	@ResponseBody
@@ -134,11 +170,25 @@ public class MainController {
 	}
 	
 	
+	//스토어 모든 리스트
+	@PostMapping("alllist")
+	@ResponseBody
+	public ArrayList<ProductVo> allList(){
+		ArrayList<ProductVo> list = storeService.producerAllList();
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setProduct_Price2(format.format(list.get(i).getProduct_Price()));
+		}
+		return list;
+	}
+	
 	//스토어 가구 리스트
 	@PostMapping("furniturelist")
 	@ResponseBody
 	public ArrayList<ProductVo> furniturelist() {
 		ArrayList<ProductVo> list = storeService.selectFurnitureList();
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setProduct_Price2(format.format(list.get(i).getProduct_Price()));
+		}
 		return list;
 	}
 	//스토어 가전 리스트
@@ -146,6 +196,9 @@ public class MainController {
 	@ResponseBody
 	public ArrayList<ProductVo> applianceslist() {
 		ArrayList<ProductVo> list = storeService.selectappliancesList();
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setProduct_Price2(format.format(list.get(i).getProduct_Price()));
+		}
 		return list;
 	}
 	//스토어 페브릭 리스트
@@ -153,6 +206,9 @@ public class MainController {
 	@ResponseBody
 	public ArrayList<ProductVo> Fabriclist() {
 		ArrayList<ProductVo> list = storeService.selectFabricList();
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setProduct_Price2(format.format(list.get(i).getProduct_Price()));
+		}
 		return list;
 	}
 	//스토어 반려용품 리스트
@@ -160,8 +216,26 @@ public class MainController {
 	@ResponseBody
 	public ArrayList<ProductVo> Patlist() {
 		ArrayList<ProductVo> list = storeService.selectPatList();
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setProduct_Price2(format.format(list.get(i).getProduct_Price()));
+		}
 		return list;
 	}
 	
+	//검색
+	@RequestMapping("selectGO")
+	public String select(@RequestParam String search, Model model) {
+		System.out.println("검색어 ? " + search);
+		//회사 부분
+		ArrayList<CompanyVo> Clist = userService.selectComSearchList(search);
+		//상품 부분
+		ArrayList<ProductVo> Slist = userService.selectStoreSearchList(search);
+		for(int i=0;i<Slist.size();i++) {
+			Slist.get(i).setProduct_Price2(format.format(Slist.get(i).getProduct_Price()));
+		}
+		model.addAttribute("Clist",Clist);
+		model.addAttribute("Slist",Slist);
+		return "/select";
+	}
 	
 }//class

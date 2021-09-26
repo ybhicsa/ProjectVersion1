@@ -39,6 +39,9 @@ public class Construction_InquiryVo {
 
 	    // 조회수 
 	    private Integer cd_Bhit;
+	    
+	    //답변 현황
+	    private String reply_Check;
 
 	    
 }//class

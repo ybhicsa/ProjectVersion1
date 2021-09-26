@@ -1,6 +1,7 @@
 package com.site.p0823.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class CompanyController {
 			String main1 = String.format("%s", Main);
 			
 			//파일저장위치
-			String fileUrl = "C:/workspace/pro_Version04/src/main/resources/static/companyImg/";
+			String fileUrl = "C:/workspace/pro_Version09/src/main/resources/static/companyImg/";
 			//복사할 파일
 			File f = new File(fileUrl+Main);
 			//파일 업로드
@@ -80,7 +81,6 @@ public class CompanyController {
 			//db에 저장하기 위해 vo에 파일이름을 저장시킴.
 			companyVo.setCc_Main(main1);
 		}
-		System.out.println(companyVo);
 		companyService.insertCompanyOne(companyVo);
 		return "/company/companyRegistration";
 	}
@@ -95,11 +95,13 @@ public class CompanyController {
 	
 	//시공문의하기 저장
 	@PostMapping("interiorInquiries")
-	public String company(InquiryVo inquiryVo) {
+	public String company(InquiryVo inquiryVo,@RequestParam String user_Nickname) throws Exception {
 		//System.out.println(inquiryVo);
+		
 		companyService.insertInquirySave(inquiryVo);
-		System.out.println(inquiryVo.getUser_Nickname());
-		return "redirect:/myPage?nickname="+inquiryVo.getUser_Nickname();
+		String nickname = URLEncoder.encode(inquiryVo.getUser_Nickname(), "UTF-8");
+		
+		return "redirect:/myPage?nickname="+nickname;
 	}
 	
 	
